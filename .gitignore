@@ -1,0 +1,10 @@
+# File sensibili locali (non committare mai)
+woxel_token.txt
+woxel_github.txt
+
+# Artefatti temporanei
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.env

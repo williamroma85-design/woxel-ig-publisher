@@ -1,0 +1,76 @@
+name: Woxel IG Daily Publish
+
+on:
+  # Cron in UTC. 07:00 UTC = 09:00 Europe/Rome in estate (CEST), 08:00 in inverno (CET).
+  # Per coprire sia estate che inverno con la finestra 08:00–09:00 Rome,
+  # schedulo due volte: idempotenza garantita dallo stato 'published' nel piano.
+  schedule:
+    - cron: '0 7 * * 1,2,4,5'   # Mon/Tue/Thu/Fri 07:00 UTC (estate = 09:00 Rome)
+    - cron: '0 8 * * 1,2,4,5'   # Mon/Tue/Thu/Fri 08:00 UTC (inverno = 09:00 Rome)
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Slug specifico da pubblicare (opzionale; lascia vuoto per post di oggi)"
+        required: false
+        default: ''
+
+concurrency:
+  group: woxel-ig-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    env:
+      TZ: Europe/Rome
+      WOXEL_META_TOKEN: ${{ secrets.WOXEL_META_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
+      WOXEL_CDN_REPO: woxel-ig-assets
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run publisher
+        run: |
+          if [ -n "${{ github.event.inputs.slug }}" ]; then
+            python woxel_daily_publish.py "${{ github.event.inputs.slug }}"
+          else
+            python woxel_daily_publish.py
+          fi
+
+      - name: Commit state changes
+        if: always()
+        run: |
+          git config user.name  "woxel-bot"
+          git config user.email "woxel-bot@users.noreply.github.com"
+          git add editorial_plan_data.json woxel_publish_log.txt 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da committare."
+          else
+            git commit -m "chore: auto-publish state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+
+      - name: Upload log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: woxel-publish-log-${{ github.run_id }}
+          path: woxel_publish_log.txt
+          if-no-files-found: ignore
+          retention-days: 30
