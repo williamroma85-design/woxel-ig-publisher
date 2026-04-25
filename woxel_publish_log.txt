@@ -1,0 +1,16 @@
+[2026-04-25 12:22:53] === Woxel Daily Publisher v2 — 2026-04-25 ===
+[2026-04-25 12:22:53]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-04-25 12:22:53] Trovati 1 post approvati per oggi.
+[2026-04-25 12:22:53] Pubblicazione: 23-agente-vs-receptionist
+[2026-04-25 12:22:53]   Conversione PNG→JPEG (richiesta da IG Content Publishing) …
+[2026-04-25 12:22:53]     JPEG temporaneo: /tmp/woxel_982a00b183d242ffa72364e5143988d7.jpg (68690 bytes)
+[2026-04-25 12:22:53]   Upload immagine 23-agente-vs-receptionist.jpg …
+[2026-04-25 12:22:53]     Upload via GitHub raw (user=williamroma85-design, repo=woxel-ig-assets) …
+[2026-04-25 12:22:54]     OK GitHub → https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1777112573_0dd88de7_woxel_982a00b183d242ffa72364e5143988d7.jpg
+[2026-04-25 12:22:54]   CDN URL: https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1777112573_0dd88de7_woxel_982a00b183d242ffa72364e5143988d7.jpg
+[2026-04-25 12:22:54]   Creazione container IG …
+[2026-04-25 12:22:58]   Container ID: 17869996479667255
+[2026-04-25 12:23:01]   Pubblicazione su Instagram …
+[2026-04-25 12:23:03]   ✅ Pubblicato! Media ID: 18151430179475723
+[2026-04-25 12:23:03] === Fine ===
+
