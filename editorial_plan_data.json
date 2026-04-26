@@ -112,8 +112,8 @@
           "date": "2026-04-22",
           "time": "09:00",
           "stato": "published",
-          "published_at": "2026-04-25T17:49:05",
-          "media_id": "18149031616486528"
+          "published_at": "2026-04-25T00:00:00",
+          "media_id": "(recuperato via workflow_dispatch, media_id non registrato)"
         },
         {
           "n": "22-stessa-email-100-volte",
@@ -126,8 +126,8 @@
           "date": "2026-04-24",
           "time": "09:00",
           "stato": "published",
-          "published_at": "2026-04-25T17:49:59",
-          "media_id": "18315036910287762"
+          "published_at": "2026-04-25T00:00:00",
+          "media_id": "(recuperato via workflow_dispatch, media_id non registrato)"
         },
         {
           "n": "23-agente-vs-receptionist",
@@ -140,8 +140,8 @@
           "date": "2026-04-25",
           "time": "09:00",
           "stato": "published",
-          "published_at": "2026-04-25T12:23:03",
-          "media_id": "18151430179475723"
+          "media_id": "17918610468347637",
+          "published_at": "2026-04-25T12:25:28"
         }
       ]
     },

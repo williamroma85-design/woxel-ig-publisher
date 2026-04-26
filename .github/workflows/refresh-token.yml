@@ -1,0 +1,46 @@
+name: Refresh Meta Token
+
+# Rinnova settimanalmente il long-lived token Instagram Business.
+# Ogni chiamata a /refresh_access_token estende la scadenza di 60 giorni,
+# quindi girando settimanalmente il token resta sempre fresco.
+#
+# Requisiti:
+#   - Secret WOXEL_META_TOKEN già configurato (token corrente)
+#   - Secret GH_PAT con scope `repo` (per aggiornare i secret del repo)
+
+on:
+  schedule:
+    # Lunedì 03:00 UTC (= 04:00/05:00 Europe/Rome a seconda della stagione),
+    # ben prima del run di publish delle 07:00 UTC.
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: woxel-token-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    env:
+      WOXEL_META_TOKEN: ${{ secrets.WOXEL_META_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pynacl
+        run: pip install pynacl
+
+      - name: Refresh token
+        run: python refresh_token.py

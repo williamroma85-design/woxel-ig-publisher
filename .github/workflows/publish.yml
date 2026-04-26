@@ -61,10 +61,24 @@ jobs:
           git add editorial_plan_data.json woxel_publish_log.txt 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nessuna modifica da committare."
-          else
-            git commit -m "chore: auto-publish state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push
+            exit 0
           fi
+          git commit -m "chore: auto-publish state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Retry con pull --rebase per gestire race condition col remote
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Push OK al tentativo $attempt"
+              exit 0
+            fi
+            echo "Push tentativo $attempt fallito (remote avanzato), faccio pull --rebase e riprovo…"
+            git pull --rebase origin main || {
+              echo "Rebase fallito — abort"
+              exit 1
+            }
+            sleep $((attempt * 2))
+          done
+          echo "Push fallito dopo 5 tentativi"
+          exit 1
 
       - name: Upload log artifact
         if: always()
