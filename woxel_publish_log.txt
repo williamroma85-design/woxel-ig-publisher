@@ -52,3 +52,6 @@
 [2026-04-26 11:17:54] === Woxel Daily Publisher v2 — 2026-04-26 ===
 [2026-04-26 11:17:54]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
 [2026-04-26 11:17:54] Post 'cd ~/Downloads/woxel-ig-publisher git pull --rebase' non trovato nel piano (o già pubblicato).
+[2026-04-27 14:11:41] === Woxel Daily Publisher v2 — 2026-04-27 ===
+[2026-04-27 14:11:41]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-04-27 14:11:41] Nessun post schedulato per 2026-04-27. Fine.
