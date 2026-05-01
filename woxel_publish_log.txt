@@ -83,3 +83,19 @@
 [2026-04-30 15:10:01] === Woxel Daily Publisher v2 — 2026-04-30 ===
 [2026-04-30 15:10:01]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
 [2026-04-30 15:10:01] Nessun post schedulato per 2026-04-30. Fine.
+[2026-05-01 10:53:13] === Woxel Daily Publisher v2 — 2026-05-01 ===
+[2026-05-01 10:53:13]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-05-01 10:53:13] Trovati 1 post approvati per oggi.
+[2026-05-01 10:53:13] Pubblicazione: 26-chatgpt-non-basta
+[2026-05-01 10:53:13]   Conversione PNG→JPEG (richiesta da IG Content Publishing) …
+[2026-05-01 10:53:13]     JPEG temporaneo: /tmp/woxel_fccf2c2d49434bff87c171531710977f.jpg (59312 bytes)
+[2026-05-01 10:53:13]   Upload immagine 26-chatgpt-non-basta.jpg …
+[2026-05-01 10:53:13]     Upload via GitHub raw (user=williamroma85-design, repo=woxel-ig-assets) …
+[2026-05-01 10:53:14]     OK GitHub → https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1777625594_3fef59b5_woxel_fccf2c2d49434bff87c171531710977f.jpg
+[2026-05-01 10:53:14]   CDN URL: https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1777625594_3fef59b5_woxel_fccf2c2d49434bff87c171531710977f.jpg
+[2026-05-01 10:53:14]   Creazione container IG …
+[2026-05-01 10:53:17]   Container ID: 17871301158667255
+[2026-05-01 10:53:20]   Pubblicazione su Instagram …
+[2026-05-01 10:53:22]   ✅ Pubblicato! Media ID: 18072696209285318
+[2026-05-01 10:53:22] === Fine ===
+
