@@ -99,3 +99,6 @@
 [2026-05-01 10:53:22]   ✅ Pubblicato! Media ID: 18072696209285318
 [2026-05-01 10:53:22] === Fine ===
 
+[2026-05-01 11:28:04] === Woxel Daily Publisher v2 — 2026-05-01 ===
+[2026-05-01 11:28:05]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-05-01 11:28:05] Nessun post schedulato per 2026-05-01. Fine.
