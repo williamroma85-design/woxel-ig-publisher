@@ -133,3 +133,19 @@
 [2026-05-07 12:17:27] === Woxel Daily Publisher v2 — 2026-05-07 ===
 [2026-05-07 12:17:28]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
 [2026-05-07 12:17:28] Nessun post schedulato per 2026-05-07. Fine.
+[2026-05-08 10:17:02] === Woxel Daily Publisher v2 — 2026-05-08 ===
+[2026-05-08 10:17:02]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-05-08 10:17:02] Trovati 1 post approvati per oggi.
+[2026-05-08 10:17:02] Pubblicazione: 30-integrazione-48-ore
+[2026-05-08 10:17:02]   Conversione PNG→JPEG (richiesta da IG Content Publishing) …
+[2026-05-08 10:17:02]     JPEG temporaneo: /tmp/woxel_a8c9dcfb6324452c959c6eb6ad2218d8.jpg (61019 bytes)
+[2026-05-08 10:17:02]   Upload immagine 30-integrazione-48-ore.jpg …
+[2026-05-08 10:17:02]     Upload via GitHub raw (user=williamroma85-design, repo=woxel-ig-assets) …
+[2026-05-08 10:17:04]     OK GitHub → https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1778228223_32a8e0f0_woxel_a8c9dcfb6324452c959c6eb6ad2218d8.jpg
+[2026-05-08 10:17:04]   CDN URL: https://raw.githubusercontent.com/williamroma85-design/woxel-ig-assets/main/1778228223_32a8e0f0_woxel_a8c9dcfb6324452c959c6eb6ad2218d8.jpg
+[2026-05-08 10:17:04]   Creazione container IG …
+[2026-05-08 10:17:06]   Container ID: 17872758390667255
+[2026-05-08 10:17:09]   Pubblicazione su Instagram …
+[2026-05-08 10:17:12]   ✅ Pubblicato! Media ID: 17865951987682026
+[2026-05-08 10:17:12] === Fine ===
+
