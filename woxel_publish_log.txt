@@ -205,3 +205,6 @@
 [2026-05-18 12:54:24] === Woxel Daily Publisher v2 — 2026-05-18 ===
 [2026-05-18 12:54:24]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
 [2026-05-18 12:54:24] Nessun post schedulato per 2026-05-18. Fine.
+[2026-05-18 13:39:55] === Woxel Daily Publisher v2 — 2026-05-18 ===
+[2026-05-18 13:39:56]   Token valido. Account IG: @woxel.ai (id=17841480017636624)
+[2026-05-18 13:39:56] Nessun post schedulato per 2026-05-18. Fine.
