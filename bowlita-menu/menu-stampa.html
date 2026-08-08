@@ -1,0 +1,1092 @@
+<title>Bowlita — Menu da leggere e stampare</title>
+
+<style>
+/* ============================================================
+   BOWLITA · MENU DI LETTURA / STAMPA
+   4 pagine A4 (210 × 297 mm). Ciò che vedi a schermo è ciò
+   che esce dalla stampante: stessi fogli, stessi margini.
+
+   >>> PALETTE SEGNAPOSTO <<<
+   I sei valori qui sotto NON sono ancora quelli del brand:
+   sono un'ipotesi. Sostituendo questi sei, tutto il menu si
+   riallinea — non c'è un colore scritto altrove nel file.
+   ============================================================ */
+
+:root{
+  --carta:    #FFFFFF;   /* il foglio */
+  --inchio:   #10241F;   /* testo principale */
+  --inchio-2: #4A5D57;   /* testo secondario, ingredienti */
+  --inchio-3: #8A9791;   /* etichette, codici allergene */
+  --filo:     #D8DFD2;   /* righe e bordi */
+  --accento:  #E2542F;   /* un solo accento */
+  --oro:      #B87400;   /* solo i "più ordinati" */
+  --verde:    #46701F;   /* solo il marcatore veg */
+  --piccante: #B92718;   /* solo il marcatore piccante */
+
+  /* fondo attorno ai fogli, a schermo */
+  --scrivania: #E7EAE3;
+
+  --display: "SF Pro Rounded", ui-rounded, "Segoe UI Variable Display",
+             "Hiragino Maru Gothic ProN", "Trebuchet MS", "Roboto", system-ui, sans-serif;
+  --testo: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --dati: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+}
+
+/* La scrivania si adatta al tema del lettore; il foglio resta carta. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --scrivania: #11201C; }
+}
+:root[data-theme="dark"]{ --scrivania: #11201C; }
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  background: var(--scrivania);
+  color: var(--inchio);
+  font-family: var(--testo);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ---------- il foglio ---------- */
+
+.foglio{
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--carta);
+  color: var(--inchio);
+  padding: 14mm 13mm 12mm;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0,0,0,.10), 0 20px 50px -24px rgba(0,0,0,.35);
+  /* a schermo il foglio si rimpicciolisce invece di uscire dallo schermo */
+  transform-origin: top center;
+}
+
+@media (max-width: 840px){
+  body{ padding: 14px 0; }
+  .foglio{ transform: scale(var(--zoom, 1)); margin-bottom: var(--rientro, 0px); }
+}
+
+/* ---------- tipografia ---------- */
+
+h1,h2,h3,h4,p,ul,ol{ margin: 0; }
+ul{ list-style: none; padding: 0; }
+
+.occhiello{
+  font-family: var(--dati);
+  font-size: 7pt;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--inchio-3);
+}
+
+.titolo-sez{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 19pt;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+  margin-top: 1.5mm;
+}
+
+.intro-sez{
+  font-size: 8.5pt;
+  color: var(--inchio-2);
+  line-height: 1.45;
+  margin-top: 1.5mm;
+  max-width: 105mm;
+}
+
+.testata-sez{
+  border-bottom: 1.2pt solid var(--inchio);
+  padding-bottom: 3mm;
+  margin-bottom: 5mm;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8mm;
+}
+
+.testata-sez__dx{
+  text-align: right;
+  font-family: var(--dati);
+  font-size: 7.5pt;
+  color: var(--inchio-3);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  padding-bottom: 1mm;
+}
+
+/* ---------- marchio ---------- */
+
+.marchio{ display: flex; align-items: center; gap: 3mm; }
+
+.marchio__nome{
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1;
+  font-size: 15pt;
+}
+
+.marchio__nome i{ font-style: normal; color: var(--accento); }
+
+/* ---------- COPERTINA ---------- */
+
+.cover{ justify-content: space-between; }
+
+.cover__alto{ text-align: center; padding-top: 3mm; }
+
+.cover__marchio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4mm;
+}
+
+.cover__nome{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 44pt;
+  letter-spacing: -.05em;
+  line-height: .9;
+}
+
+.cover__nome i{ font-style: normal; color: var(--accento); }
+
+.cover__sotto{
+  font-family: var(--dati);
+  font-size: 8pt;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--inchio-3);
+}
+
+.cover__claim{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 21pt;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin-top: 7mm;
+  text-wrap: balance;
+}
+
+.cover__claim i{ font-style: normal; color: var(--accento); }
+
+.cover__occhio{
+  font-size: 9.5pt;
+  color: var(--inchio-2);
+  line-height: 1.5;
+  max-width: 118mm;
+  margin: 4mm auto 0;
+}
+
+/* scatto d'apertura: la foto che vende, in cima al menu */
+
+.cover__scatto{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 4.5;
+  background: #F5F7F2;
+  border-radius: 3mm;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  margin-top: 9mm;
+}
+
+.cover__scatto img{ width: 100%; height: 100%; object-fit: cover; }
+
+.cover__scatto::after{
+  content: "";
+  position: absolute;
+  height: 72%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: .8pt dashed #B9C4B2;
+}
+
+.cover__scatto span{
+  position: absolute;
+  bottom: 2.5mm; left: 3mm;
+  font-family: var(--dati);
+  font-size: 6.4pt;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--inchio-3);
+}
+
+/* formati */
+
+.formati{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin-top: 7mm;
+}
+
+.formato{
+  border: 1.2pt solid var(--filo);
+  border-radius: 3mm;
+  padding: 5mm 5mm 5.5mm;
+  text-align: left;
+}
+
+.formato--hi{ border-color: var(--accento); }
+
+.formato__riga{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4mm;
+}
+
+.formato__n{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 13pt;
+  letter-spacing: -.025em;
+}
+
+.formato__p{
+  font-family: var(--dati);
+  font-weight: 700;
+  font-size: 12pt;
+  font-variant-numeric: tabular-nums;
+}
+
+.formato__d{
+  font-size: 8.5pt;
+  color: var(--inchio-2);
+  line-height: 1.5;
+  margin-top: 2mm;
+}
+
+/* guida alla scelta — la versione da carta del "ti consiglio" */
+
+.guida{
+  margin-top: 7mm;
+  border-top: 1.2pt solid var(--inchio);
+  padding-top: 4mm;
+}
+
+.guida__t{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 13pt;
+  letter-spacing: -.025em;
+  text-align: left;
+}
+
+.guida__d{
+  font-size: 8.5pt;
+  color: var(--inchio-2);
+  margin-top: 1.5mm;
+  text-align: left;
+}
+
+.guida__griglia{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 8mm;
+  margin-top: 4mm;
+}
+
+.guida__r{
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+  padding: 2.4mm 0;
+  border-bottom: .6pt dotted var(--filo);
+  font-size: 8.5pt;
+  text-align: left;
+}
+
+.guida__se{
+  color: var(--inchio-2);
+  flex: 1;
+}
+
+.guida__poi{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 9.5pt;
+  letter-spacing: -.02em;
+  color: var(--accento);
+  white-space: nowrap;
+}
+
+.faitu{
+  margin-top: 4mm;
+  background: var(--inchio);
+  color: var(--carta);
+  border-radius: 2.5mm;
+  padding: 3.5mm 5mm;
+  font-size: 8.5pt;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.faitu b{ font-family: var(--display); font-size: 10pt; letter-spacing: -.02em; }
+
+/* piede di pagina */
+
+.piede{
+  margin-top: auto;
+  padding-top: 5mm;
+  border-top: .8pt solid var(--filo);
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+  font-family: var(--dati);
+  font-size: 7pt;
+  letter-spacing: .06em;
+  color: var(--inchio-3);
+  text-transform: uppercase;
+}
+
+.piede b{ display: block; color: var(--inchio); font-weight: 700; margin-bottom: .8mm; }
+
+.piede--num{ justify-content: flex-end; }
+
+/* ---------- griglia piatti ---------- */
+
+.piatti{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4.5mm 5mm;
+}
+
+.piatto{ break-inside: avoid; }
+
+.scatto{
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: #F5F7F2;
+  border-radius: 2.5mm;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  margin-bottom: 2mm;
+}
+
+.scatto img{ width: 100%; height: 100%; object-fit: cover; }
+
+.scatto__ph{ position: absolute; inset: 0; display: grid; place-items: center; }
+
+.scatto__ph::after{
+  content: "";
+  position: absolute;
+  height: 74%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: .8pt dashed #B9C4B2;
+}
+
+.scatto__cerchio{
+  height: 66%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 33% 31%, var(--c1) 0 27%, transparent 28%),
+    radial-gradient(circle at 68% 38%, var(--c2) 0 23%, transparent 24%),
+    radial-gradient(circle at 47% 70%, var(--c3) 0 26%, transparent 27%),
+    #F0F3EC;
+  filter: blur(7px) saturate(.7);
+  opacity: .5;
+}
+
+.scatto__nota{
+  position: absolute;
+  bottom: 1.6mm; left: 1.6mm;
+  font-family: var(--dati);
+  font-size: 5.6pt;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--inchio-3);
+  background: rgba(255,255,255,.82);
+  border-radius: 1mm;
+  padding: .6mm 1.2mm;
+}
+
+.piatto__testa{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2.5mm;
+}
+
+.piatto__n{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 11.5pt;
+  letter-spacing: -.028em;
+  line-height: 1.1;
+}
+
+.piatto__p{
+  font-family: var(--dati);
+  font-weight: 700;
+  font-size: 8pt;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--inchio);
+}
+
+.piatto__claim{
+  font-size: 7.6pt;
+  font-weight: 600;
+  color: var(--accento);
+  line-height: 1.35;
+  margin-top: 1mm;
+}
+
+.piatto__ing{
+  font-size: 7.8pt;
+  color: var(--inchio-2);
+  line-height: 1.4;
+  margin-top: 1.2mm;
+}
+
+.piatto__all{
+  font-family: var(--dati);
+  font-size: 6.4pt;
+  letter-spacing: .08em;
+  color: var(--inchio-3);
+  margin-top: 1.6mm;
+  padding-top: 1.4mm;
+  border-top: .6pt solid var(--filo);
+}
+
+/* marcatori */
+
+.segni{ display: flex; gap: 1.4mm; flex-wrap: wrap; margin-top: 1.4mm; }
+
+.segno{
+  font-family: var(--dati);
+  font-size: 5.8pt;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .7mm 1.6mm;
+  border-radius: 1mm;
+  border: .6pt solid currentColor;
+}
+
+.segno--top{ color: var(--oro); }
+.segno--veg{ color: var(--verde); }
+.segno--pic{ color: var(--piccante); }
+
+/* ---------- crea la tua ---------- */
+
+.passi{ display: grid; gap: 3.5mm; }
+
+.passo{
+  display: grid;
+  grid-template-columns: 7mm 1fr;
+  gap: 4mm;
+  padding-bottom: 3.5mm;
+  border-bottom: .6pt solid var(--filo);
+  break-inside: avoid;
+}
+
+.passo:last-child{ border-bottom: none; padding-bottom: 0; }
+
+.passo__n{
+  font-family: var(--dati);
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--carta);
+  background: var(--inchio);
+  width: 7mm; height: 7mm;
+  border-radius: 50%;
+  display: grid; place-items: center;
+}
+
+.passo__t{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 11.5pt;
+  letter-spacing: -.025em;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4mm;
+}
+
+.passo__extra{
+  font-family: var(--dati);
+  font-size: 7pt;
+  font-weight: 600;
+  color: var(--inchio-3);
+  letter-spacing: .03em;
+}
+
+.passo__el{
+  font-size: 8.6pt;
+  color: var(--inchio-2);
+  line-height: 1.6;
+  margin-top: 1.5mm;
+}
+
+.passo__el b{ color: var(--accento); font-weight: 700; }
+.passo__el .v{ color: var(--verde); font-weight: 600; }
+.passo__el .s{ color: var(--piccante); font-weight: 600; }
+
+/* ---------- listini ---------- */
+
+.listini{ display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 8mm; }
+.listini--tre{ grid-template-columns: repeat(3, 1fr); }
+
+.gruppo{ break-inside: avoid; }
+
+.gruppo__testa{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+  border-bottom: 1pt solid var(--inchio);
+  padding-bottom: 1.6mm;
+}
+
+.gruppo__n{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 12.5pt;
+  letter-spacing: -.025em;
+}
+
+.gruppo__p{
+  font-family: var(--dati);
+  font-weight: 700;
+  font-size: 9pt;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.gruppo__d{
+  font-size: 7.8pt;
+  color: var(--inchio-2);
+  line-height: 1.4;
+  margin-top: 1.5mm;
+}
+
+.gruppo__l{ margin-top: 2mm; }
+
+.gruppo__l li{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+  padding: 1.6mm 0;
+  border-bottom: .6pt dotted var(--filo);
+  font-size: 8.4pt;
+}
+
+.gruppo__l li:last-child{ border-bottom: none; }
+
+.voce__n{ color: var(--inchio); }
+
+.voce__a{
+  font-family: var(--dati);
+  font-size: 6.4pt;
+  color: var(--inchio-3);
+  letter-spacing: .08em;
+  margin-left: 1.5mm;
+}
+
+.gruppo__nota{
+  font-family: var(--dati);
+  font-size: 6.4pt;
+  letter-spacing: .06em;
+  color: var(--inchio-3);
+  margin-top: 1.5mm;
+}
+
+/* ---------- allergeni ---------- */
+
+.avviso{
+  border: 1pt solid var(--accento);
+  border-radius: 2.5mm;
+  padding: 4mm 5mm;
+  font-size: 8.4pt;
+  line-height: 1.5;
+  color: var(--inchio-2);
+  margin-bottom: 5mm;
+}
+
+.avviso b{ color: var(--inchio); }
+
+.legenda{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 7mm;
+}
+
+.legenda li{
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+  padding: 1.5mm 0;
+  border-bottom: .6pt dotted var(--filo);
+  font-size: 8.6pt;
+}
+
+.legenda__c{
+  font-family: var(--dati);
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: var(--inchio);
+  width: 5mm;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ---------- stampa ---------- */
+
+@page{ size: A4; margin: 0; }
+
+@media print{
+  html, body{ background: #fff; }
+  body{ padding: 0; gap: 0; display: block; }
+  .foglio{
+    box-shadow: none;
+    margin: 0;
+    transform: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .foglio:last-child{ break-after: auto; page-break-after: auto; }
+  /* i fondi pieni devono uscire davvero dalla stampante */
+  *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .schermo{ display: none !important; }
+}
+
+/* barra visibile solo a schermo */
+.schermo{
+  width: 210mm;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--testo);
+  font-size: 13px;
+  color: var(--inchio-2);
+  background: var(--carta);
+  border: 1px solid var(--filo);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.schermo b{ color: var(--inchio); }
+.schermo p{ flex: 1; min-width: 220px; line-height: 1.45; }
+
+.schermo button{
+  font-family: var(--testo);
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--accento);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+}
+</style>
+
+
+<div class="schermo">
+  <p><b>Menu di lettura, 4 pagine A4.</b> Quello che vedi è quello che esce dalla stampante:
+     stessi fogli, stessi margini. Stampa senza intestazioni del browser, margini “Nessuno”.</p>
+  <button type="button" onclick="window.print()">Stampa / PDF</button>
+</div>
+
+
+<!-- ============ PAGINA 1 · COPERTINA ============ -->
+<article class="foglio cover">
+  <div class="cover__alto">
+    <div class="cover__marchio">
+      <svg width="52" height="52" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M4 14 h24 a12 12 0 0 1 -24 0 z" fill="var(--accento)"></path>
+        <circle cx="12" cy="10" r="2.6" fill="var(--inchio)"></circle>
+        <circle cx="19.5" cy="8.5" r="2" fill="var(--oro)"></circle>
+        <circle cx="24.5" cy="11.5" r="1.7" fill="var(--verde)"></circle>
+      </svg>
+      <div class="cover__nome">bowlita<i>.</i></div>
+      <div class="cover__sotto">Poke · Roma</div>
+    </div>
+
+    <h1 class="cover__claim">Dimmi cosa ti va.<br>Al resto pensiamo noi<i>.</i></h1>
+    <p class="cover__occhio">
+      Nove bowl già bilanciate per non farti sbagliare, oppure te la costruisci da zero.
+      Tutto incluso nel prezzo: nessun supplemento a sorpresa.
+    </p>
+
+    <div class="cover__scatto">
+      <span>foto d'apertura · 16:4,5 · il piatto migliore che avete</span>
+    </div>
+
+    <div class="formati">
+      <div class="formato formato--hi">
+        <div class="formato__riga"><span class="formato__n">Regular</span><span class="formato__p">10,99 €</span></div>
+        <p class="formato__d">1 base · 1 proteina · 4 topping · 1 salsa · 1 crunch</p>
+      </div>
+      <div class="formato">
+        <div class="formato__riga"><span class="formato__n">Large</span><span class="formato__p">13,99 €</span></div>
+        <p class="formato__d">1 base · 2 proteine · 5 topping · 2 salse · 2 crunch</p>
+      </div>
+    </div>
+
+    <div class="guida">
+      <h2 class="guida__t">Non sai cosa scegliere?</h2>
+      <p class="guida__d">Trova la riga che ti somiglia. Poi la trovi a pagina 2.</p>
+      <div class="guida__griglia" id="guida"></div>
+
+      <p class="faitu">
+        <b>Oppure dì “fai tu”.</b><br>
+        Ti prepariamo il mix della casa del giorno. È la scorciatoia più usata, e non ha mai deluso nessuno.
+      </p>
+    </div>
+  </div>
+
+  <div class="piede">
+    <div><b>Orari</b>11:30 – 15:00 · 18:30 – 22:30</div>
+    <div><b>Ritiro</b>Pronto in 10–15 min</div>
+    <div><b>Consegna</b>Zone selezionate</div>
+    <div><b>Pagamenti</b>Contanti · Carta · Buoni pasto</div>
+  </div>
+</article>
+
+
+<!-- ============ PAGINA 2 · LE BOWL ============ -->
+<article class="foglio">
+  <header class="testata-sez">
+    <div>
+      <p class="occhiello">Le nostre nove</p>
+      <h2 class="titolo-sez">Bowl della casa</h2>
+      <p class="intro-sez">
+        Già bilanciate. Puoi sempre togliere o aggiungere quello che vuoi: basta dirlo.
+      </p>
+    </div>
+    <div class="testata-sez__dx">Regular 10,99 €<br>Large 13,99 €</div>
+  </header>
+
+  <div class="piatti" id="piatti"></div>
+
+  <div class="piede piede--num"><span>Bowlita · pag. 2</span></div>
+</article>
+
+
+<!-- ============ PAGINA 3 · CREA LA TUA + BURGER/WRAP ============ -->
+<article class="foglio">
+  <header class="testata-sez">
+    <div>
+      <p class="occhiello">Cinque passaggi, un minuto</p>
+      <h2 class="titolo-sez">Crea la tua</h2>
+      <p class="intro-sez">
+        In quest’ordine, senza pensarci troppo. Tra Regular e Large cambia solo
+        quante scelte sono comprese.
+      </p>
+    </div>
+    <div class="testata-sez__dx">Regular 10,99 €<br>Large 13,99 €</div>
+  </header>
+
+  <div class="passi" id="passi"></div>
+
+  <header class="testata-sez" style="margin-top:6mm;">
+    <div>
+      <p class="occhiello">Stessi ingredienti, formato diverso</p>
+      <h2 class="titolo-sez">Nel pane e nella piadina</h2>
+    </div>
+  </header>
+
+  <div class="listini" id="pane"></div>
+
+  <div class="piede piede--num"><span>Bowlita · pag. 3</span></div>
+</article>
+
+
+<!-- ============ PAGINA 4 · BANCO, BERE, ALLERGENI ============ -->
+<article class="foglio">
+  <header class="testata-sez">
+    <div>
+      <p class="occhiello">Dal banco</p>
+      <h2 class="titolo-sez">Tartare, bao, zuppe</h2>
+    </div>
+  </header>
+
+  <div class="listini listini--tre" id="banco"></div>
+
+  <header class="testata-sez" style="margin-top:6mm;">
+    <div>
+      <p class="occhiello">Per chiudere</p>
+      <h2 class="titolo-sez">Bere &amp; dolci</h2>
+    </div>
+  </header>
+
+  <div class="listini" id="bere"></div>
+
+  <header class="testata-sez" style="margin-top:6mm;">
+    <div>
+      <p class="occhiello">Regolamento UE 1169/2011</p>
+      <h2 class="titolo-sez">Allergeni</h2>
+    </div>
+  </header>
+
+  <p class="avviso" id="avviso"></p>
+
+  <ul class="legenda" id="legenda"></ul>
+
+  <div class="piede">
+    <div><b>Bowlita</b>Poke · Roma</div>
+    <div><b>Indirizzo</b>da inserire</div>
+    <div><b>Telefono</b>da inserire</div>
+    <div><b>Ordini</b>WhatsApp — da inserire</div>
+  </div>
+</article>
+
+
+<script>
+/* ============================================================
+   DATI — allineare a sito/data/menu.json quando il menu cambia.
+   Gli allergeni usano la numerazione dell'Allegato II UE 1169/2011,
+   la stessa che si trova sui menu stampati italiani.
+   ============================================================ */
+
+const ALLERGENI = ['Glutine','Crostacei','Uova','Pesce','Arachidi','Soia','Latte',
+  'Frutta a guscio','Sedano','Senape','Sesamo','Solfiti','Lupini','Molluschi'];
+
+const BOWLS = [
+  { n:'Hawaii', sup:0, segni:['top'],
+    claim:'La più ordinata. Se è la prima volta, parti da qui.',
+    ing:'Riso bianco, salmone, avocado, pomodoro, ponzu, sesamo nero, pistacchio, mandorle.',
+    all:[1,4,6,8,11], col:['#F2724B','#7FA64A','#D8452F'] },
+
+  { n:'Pacific', sup:0, segni:[],
+    claim:'Fresca ma sazia. Il tonno regge bene le verdure marinate.',
+    ing:'Tonno, zucchine, carote, teriyaki, tzatziki.',
+    all:[1,4,6,7], col:['#C7503F','#8BAF52','#E0A93C'] },
+
+  { n:'Devil', sup:0, segni:['pic'],
+    claim:'Piccantina vera. Se ami la spicy mayo, è questa.',
+    ing:'Salmone, wakame, spicy mayo.',
+    all:[3,4,6,10,11], col:['#E8452C','#2E6B4F','#F0764A'] },
+
+  { n:'Polipus', sup:1, segni:[],
+    claim:'Il polpo con il miele: strano sulla carta, poi lo riordini.',
+    ing:'Polpo, edamame, olive, miele.',
+    all:[6,14], col:['#B84A5A','#6E9B4A','#D9A544'] },
+
+  { n:'Camarao', sup:0, segni:[],
+    claim:'Gamberi e ceci: la più proteica del gruppo pesce.',
+    ing:'Gamberi, cetriolo, ceci, spicy mayo.',
+    all:[2,3,10,12], col:['#F0846A','#88AF56','#D9C07A'] },
+
+  { n:'Chicken', sup:0, segni:['top'],
+    claim:'Niente crudo, niente sorprese. La più ordinata dopo la Hawaii.',
+    ing:'Pollo, zucchine, peperone, teriyaki.',
+    all:[1,6], col:['#D9A25A','#7FA64A','#D8542F'] },
+
+  { n:'La Reale', sup:0, segni:[],
+    claim:'La più “da secondo piatto”. Vitello e tzatziki funzionano.',
+    ing:'Reale di vitello, verza, tzatziki.',
+    all:[7], col:['#A8523F','#7E9B58','#E8E0CC'] },
+
+  { n:'Pulled Pork', sup:0, segni:[],
+    claim:'Dolce e affumicata. La scelta più golosa del menu.',
+    ing:'Pulled pork, zucchine, miele.',
+    all:[1,6,10], col:['#9E4A2E','#7FA64A','#E0A93C'] },
+
+  { n:'Rainbow', sup:0, segni:['veg'],
+    claim:'100% vegetale e per niente triste. La più leggera.',
+    ing:'Riso basmati, verdure di stagione, ceci, salsa al limone.',
+    all:[], col:['#7FA64A','#E0B93C','#C4485E'] }
+];
+
+const PASSI = [
+  { t:'Base', extra:'compresa',
+    el:'riso bianco · riso integrale · riso nero · riso basmati · insalata · mix' },
+  { t:'Proteina', extra:'in più +2,00 €',
+    el:'salmone · tonno · pollo · pulled pork · reale di vitello · <span class="v">tofu</span> · <span class="v">edamame</span> · gamberi <b>+1 €</b> · polpo <b>+1 €</b>' },
+  { t:'Topping', extra:'in più +0,80 €',
+    el:'avocado <b>+1 €</b> · mango · pomodoro · cetriolo · carote · verza rossa · verza bianca · zucchine · peperone · rapa rossa · wakame · cipolla marinata · ceci · olive · pomodori secchi · edamame' },
+  { t:'Salsa', extra:'in più +0,80 €',
+    el:'ponzu · teriyaki · soia · <span class="s">spicy mayo</span> · limone · miele · tzatziki · <span class="s">piccante</span>' },
+  { t:'Crunch', extra:'in più +0,80 €',
+    el:'sesamo nero · sesamo bianco · pistacchio · mandorle · noci · cipolla croccante · cornflakes · uvetta' }
+];
+
+const PANE = [
+  { t:'Burger', p:'10,99 €', d:'Nel pane, con le stesse proteine delle bowl.',
+    nota:'Il pane contiene glutine e sesamo (1, 11).',
+    voci:[
+      { n:'Salmone', a:'1, 3, 4, 11' },
+      { n:'Tonno', a:'1, 3, 4, 11' },
+      { n:'Polpo', a:'1, 3, 11, 14' },
+      { n:'Pollo', a:'1, 3, 11' },
+      { n:'Pulled Pork', a:'1, 3, 10, 11' },
+      { n:'Reale di vitello', a:'1, 3, 7, 11' },
+      { n:'Vegetariano', a:'1, 3, 11', veg:1 } ] },
+
+  { t:'Wrap', p:'8,99 €', d:'Il più leggero sul conto. Si mangia camminando.',
+    nota:'La piadina contiene glutine (1).',
+    voci:[
+      { n:'Salmone', a:'1, 4' },
+      { n:'Tonno', a:'1, 4' },
+      { n:'Pollo', a:'1' },
+      { n:'Pulled Pork', a:'1, 6, 10' },
+      { n:'Reale di vitello', a:'1, 7' },
+      { n:'Vegetariano', a:'1', veg:1 } ] }
+];
+
+const BANCO = [
+  { t:'Tartare', p:'da 9,99 €', d:'Solo pesce, tagliato al momento.', nota:'',
+    voci:[
+      { n:'Salmone Classic', p:'9,99 €', a:'4, 6, 11' },
+      { n:'Tonno Classic', p:'9,99 €', a:'4, 6, 11' },
+      { n:'Gourmet Salmone', p:'11,99 €', a:'4, 6, 8, 11' },
+      { n:'Gourmet Tonno', p:'11,99 €', a:'4, 6, 8, 11' },
+      { n:'Gamberi', p:'12,99 €', a:'2, 6, 12' } ] },
+
+  { t:'Bao', p:'9,99 €', d:'Tre pezzi. Il formato giusto da dividere in due.',
+    nota:'Il pane bao contiene glutine e soia (1, 6).',
+    voci:[
+      { n:'Carne — pollo, pulled pork, pastrami', a:'1, 6, 10, 11' },
+      { n:'Pesce — salmone, tonno, gambero', a:'1, 2, 4, 6, 11' } ] },
+
+  { t:'Zuppe', p:'7,50 €', d:'Calde, per quando fuori fa il suo.', nota:'',
+    voci:[
+      { n:'Vellutata di verdure', a:'9', veg:1 },
+      { n:'Vellutata di ceci', a:'9', veg:1 },
+      { n:'Zuppa di fagioli', a:'9', veg:1 } ] }
+];
+
+const BERE = [
+  { t:'Bevande', p:'da 1,50 €', d:'Il tè freddo lo facciamo noi, ogni mattina.', nota:'',
+    voci:[
+      { n:'Acqua', p:'1,50 €', a:'' },
+      { n:'Lattina', p:'2,50 €', a:'' },
+      { n:'Tè freddo artigianale', p:'3,00 €', a:'' },
+      { n:'Estratto di frutta', p:'4,00 €', a:'' },
+      { n:'Bubble tea', p:'4,50 €', a:'può contenere 7' },
+      { n:'Birra giapponese', p:'4,50 €', a:'1, 12' } ] },
+
+  { t:'Dolci', p:'da 4,00 €', d:'Piccoli. Dopo una Large ci stanno lo stesso.', nota:'',
+    voci:[
+      { n:'Mochi (2 pz)', p:'4,00 €', a:'può contenere 7, 8' },
+      { n:'Fruit bowl', p:'4,00 €', a:'', veg:1 },
+      { n:'Cheesecake al mango', p:'4,50 €', a:'1, 3, 7' } ] }
+];
+
+/* la versione da carta del "ti consiglio": se sei X, prendi Y */
+const GUIDA = [
+  ['Vuoi il classico, non sbagliare',        'Hawaii'],
+  ['Vuoi qualcosa di leggero',               'Rainbow'],
+  ['Vuoi il piccante vero',                  'Devil'],
+  ['Non mangi crudo',                        'Chicken'],
+  ['Vuoi il massimo delle proteine',         'Camarao'],
+  ['Vuoi la più golosa',                     'Pulled Pork'],
+  ['Sei vegetariano o vegano',               'Rainbow'],
+  ['Vuoi spendere meno',                     'Wrap 8,99 €']
+];
+
+const SEGNI = { top:'Più ordinata', veg:'Veg', pic:'Piccante' };
+
+const AVVISO = `<b>Bozza da validare in cucina prima della stampa.</b> I numeri accanto ai piatti
+  sono stati ricavati dalla lista ingredienti, non dalle schede tecniche dei fornitori: vanno
+  confermati etichetta per etichetta, in particolare salsa di soia, teriyaki, ponzu, maionese,
+  pane e piadina. Lavoriamo in una cucina dove tutti i quattordici allergeni sono presenti:
+  <b>non possiamo escludere la contaminazione crociata.</b> Per allergie e intolleranze
+  parla sempre con una persona del banco prima di ordinare.`;
+
+/* ============================================================
+   IMPAGINAZIONE
+   ============================================================ */
+
+const cerchio = c =>
+  `<div class="scatto__ph"><div class="scatto__cerchio"
+     style="--c1:${c[0]};--c2:${c[1]};--c3:${c[2]}"></div></div>`;
+
+document.getElementById('piatti').innerHTML = BOWLS.map(b => `
+  <article class="piatto">
+    <div class="scatto">${cerchio(b.col)}<span class="scatto__nota">foto 4:3</span></div>
+    <div class="piatto__testa">
+      <h3 class="piatto__n">${b.n}</h3>
+      <span class="piatto__p">${(10.99 + b.sup).toFixed(2).replace('.', ',')} / ${(13.99 + b.sup).toFixed(2).replace('.', ',')}</span>
+    </div>
+    ${b.segni.length ? `<div class="segni">${b.segni
+      .map(s => `<span class="segno segno--${s}">${SEGNI[s]}</span>`).join('')}</div>` : ''}
+    <p class="piatto__claim">${b.claim}</p>
+    <p class="piatto__ing">${b.ing}${b.sup ? ' <b>Supplemento +1 €.</b>' : ''}</p>
+    <p class="piatto__all">${b.all.length ? 'Allergeni ' + b.all.join(', ') : 'Nessuno dei 14 allergeni'}</p>
+  </article>`).join('');
+
+document.getElementById('passi').innerHTML = PASSI.map((p, i) => `
+  <div class="passo">
+    <span class="passo__n">${i + 1}</span>
+    <div>
+      <div class="passo__t"><span>${p.t}</span><span class="passo__extra">${p.extra}</span></div>
+      <p class="passo__el">${p.el}</p>
+    </div>
+  </div>`).join('');
+
+function listino(gruppi){
+  return gruppi.map(g => `
+    <section class="gruppo">
+      <div class="gruppo__testa">
+        <h3 class="gruppo__n">${g.t}</h3>
+        <span class="gruppo__p">${g.p}</span>
+      </div>
+      <p class="gruppo__d">${g.d}</p>
+      <ul class="gruppo__l">
+        ${g.voci.map(v => `
+          <li>
+            <span class="voce__n">${v.n}${v.veg ? ' <span class="segno segno--veg">Veg</span>' : ''}
+              ${v.a ? `<span class="voce__a">${v.a}</span>` : ''}</span>
+            ${v.p ? `<span class="gruppo__p" style="font-size:8pt">${v.p}</span>` : ''}
+          </li>`).join('')}
+      </ul>
+      ${g.nota ? `<p class="gruppo__nota">${g.nota}</p>` : ''}
+    </section>`).join('');
+}
+
+document.getElementById('pane').innerHTML  = listino(PANE);
+document.getElementById('banco').innerHTML = listino(BANCO);
+document.getElementById('bere').innerHTML  = listino(BERE);
+
+document.getElementById('guida').innerHTML = GUIDA.map(([se, poi]) =>
+  `<div class="guida__r"><span class="guida__se">${se}</span><span class="guida__poi">${poi}</span></div>`).join('');
+
+document.getElementById('avviso').innerHTML = AVVISO;
+
+document.getElementById('legenda').innerHTML = ALLERGENI.map((a, i) =>
+  `<li><span class="legenda__c">${i + 1}</span><span>${a}</span></li>`).join('');
+
+/* A schermo stretto il foglio A4 viene scalato invece di sforare. */
+function adatta(){
+  const largo = document.documentElement.clientWidth;
+  const mm = 210 * 96 / 25.4;               // A4 in px CSS
+  const zoom = Math.min(1, (largo - 16) / mm);
+  document.documentElement.style.setProperty('--zoom', zoom);
+  document.querySelectorAll('.foglio').forEach(f => {
+    // recupera lo spazio lasciato vuoto dallo scale
+    f.style.marginBottom = (zoom < 1 ? -(f.offsetHeight * (1 - zoom)) + 20 : 0) + 'px';
+  });
+}
+adatta();
+window.addEventListener('resize', adatta);
+</script>
