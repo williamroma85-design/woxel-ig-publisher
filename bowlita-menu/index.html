@@ -1,0 +1,1788 @@
+<title>Bowlita — Menu</title>
+
+<style>
+/* ============================================================
+   BOWLITA · MENU DIGITALE
+   Token system — light è il default (:root), dark ridefinisce
+   solo i token. Nessun colore vive dentro un blocco @media.
+   ============================================================ */
+
+:root{
+  /* ground & ink */
+  --bg:            #EFF2EA;   /* celadon: neutro virato verso il verde dell'inchiostro */
+  --bg-2:          #E4E9DD;
+  --surface:       #FFFFFF;
+  --surface-2:     #F7F9F3;
+  --line:          #D3DBCB;
+  --line-strong:   #B4C0A8;
+  --ink:           #10241F;   /* nori */
+  --ink-2:         #3E524C;
+  --ink-3:         #6B7C75;
+
+  /* hero panel (pannello scuro anche in tema chiaro) */
+  --hero-bg:       #10241F;
+  --hero-ink:      #F2F6EC;
+  --hero-ink-2:    #A9BDAF;
+  --hero-line:     #274039;
+
+  /* accento: uno solo */
+  --accent:        #E2542F;   /* salmone */
+  --accent-ink:    #FFFFFF;
+  --accent-soft:   #FBE7E0;
+
+  /* dati */
+  --gold:          #B87400;   /* mango scurito per contrasto su chiaro */
+  --gold-soft:     #FBEFD6;
+
+  /* semantici (dietetici / piccante) — non sono accenti */
+  --veg:           #46701F;
+  --veg-soft:      #E5EFD8;
+  --spice:         #B92718;
+  --spice-soft:    #FBE3E0;
+  --sea:           #125E6B;
+  --sea-soft:      #DDEDEF;
+
+  /* forme */
+  --r-s: 8px;
+  --r-m: 14px;
+  --r-l: 22px;
+  --shadow: 0 1px 2px rgba(16,36,31,.05), 0 8px 24px -12px rgba(16,36,31,.18);
+  --shadow-lift: 0 2px 4px rgba(16,36,31,.06), 0 18px 40px -18px rgba(16,36,31,.28);
+
+  /* type */
+  /* rounded dove esiste (Apple), poi le grottesche più calde disponibili altrove */
+  --display: "SF Pro Rounded", ui-rounded, "Segoe UI Variable Display",
+             "Hiragino Maru Gothic ProN", "Trebuchet MS", "Roboto", system-ui, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:          #0A1513;
+    --bg-2:        #060F0D;
+    --surface:     #132320;
+    --surface-2:   #182B27;
+    --line:        #263B36;
+    --line-strong: #38534C;
+    --ink:         #ECF2E7;
+    --ink-2:       #B3C4BD;
+    --ink-3:       #85978F;
+
+    --hero-bg:     #132320;
+    --hero-ink:    #F2F6EC;
+    --hero-ink-2:  #A9BDAF;
+    --hero-line:   #2C4741;
+
+    --accent:      #FF7A55;
+    --accent-ink:  #1A0B06;
+    --accent-soft: #3A1B12;
+
+    --gold:        #F2B23C;
+    --gold-soft:   #35270D;
+
+    --veg:         #94C766;
+    --veg-soft:    #1F2E14;
+    --spice:       #FF7C6B;
+    --spice-soft:  #351511;
+    --sea:         #6FC7D3;
+    --sea-soft:    #0E2A2E;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+    --shadow-lift: 0 2px 4px rgba(0,0,0,.45), 0 18px 40px -18px rgba(0,0,0,.8);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"]{
+  --bg:          #0A1513;
+  --bg-2:        #060F0D;
+  --surface:     #132320;
+  --surface-2:   #182B27;
+  --line:        #263B36;
+  --line-strong: #38534C;
+  --ink:         #ECF2E7;
+  --ink-2:       #B3C4BD;
+  --ink-3:       #85978F;
+
+  --hero-bg:     #132320;
+  --hero-ink:    #F2F6EC;
+  --hero-ink-2:  #A9BDAF;
+  --hero-line:   #2C4741;
+
+  --accent:      #FF7A55;
+  --accent-ink:  #1A0B06;
+  --accent-soft: #3A1B12;
+
+  --gold:        #F2B23C;
+  --gold-soft:   #35270D;
+
+  --veg:         #94C766;
+  --veg-soft:    #1F2E14;
+  --spice:       #FF7C6B;
+  --spice-soft:  #351511;
+  --sea:         #6FC7D3;
+  --sea-soft:    #0E2A2E;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  --shadow-lift: 0 2px 4px rgba(0,0,0,.45), 0 18px 40px -18px rgba(0,0,0,.8);
+
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ max-width:100%; display:block; }
+
+a{ color: var(--accent); }
+
+:focus-visible{
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.wrap{
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+/* ---------- tipografia ---------- */
+
+.display{
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.eyebrow{
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.lede{
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 58ch;
+  margin: 0;
+}
+
+/* ---------- header ---------- */
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__in{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 60px;
+}
+
+.mark{
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.mark__type{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 21px;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.mark__type i{ font-style: normal; color: var(--accent); }
+
+.topnav{
+  display: none;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.topnav a{
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 7px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.topnav a:hover{ background: var(--surface); color: var(--ink); }
+
+@media (min-width: 880px){
+  .topnav{ display: flex; }
+}
+
+.themebtn{
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+}
+
+@media (min-width: 880px){ .themebtn{ margin-left: 8px; } }
+
+.themebtn:hover{ border-color: var(--line-strong); color: var(--ink); }
+
+/* ---------- hero ---------- */
+
+.hero{
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  padding: clamp(40px, 8vw, 76px) 0 clamp(36px, 6vw, 60px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right: -14%;
+  top: -30%;
+  width: 62vmax; height: 62vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%,
+      color-mix(in srgb, var(--accent) 26%, transparent) 0%,
+      transparent 62%);
+  pointer-events: none;
+}
+
+.hero__in{ position: relative; z-index: 1; }
+
+.hero .eyebrow{ color: var(--hero-ink-2); }
+
+.hero__title{
+  font-size: clamp(34px, 9vw, 78px);
+  margin: 14px 0 0;
+  color: var(--hero-ink);
+}
+
+.hero__title i{ font-style: normal; color: var(--accent); }
+
+.hero__sub{
+  margin: 16px 0 0;
+  font-size: clamp(16px, 2.4vw, 19px);
+  color: var(--hero-ink-2);
+  max-width: 46ch;
+}
+
+.hero__paths{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.btn{
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+
+.btn:active{ transform: translateY(1px); }
+
+.btn--primary{ background: var(--accent); color: var(--accent-ink); }
+.btn--primary:hover{ background: color-mix(in srgb, var(--accent) 86%, #000); }
+
+.btn--ghost{
+  background: transparent;
+  color: var(--hero-ink);
+  border-color: var(--hero-line);
+}
+.btn--ghost:hover{ border-color: var(--hero-ink-2); }
+
+.hero__facts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--hero-line);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--hero-ink-2);
+}
+
+/* ---------- sezioni ---------- */
+
+.section{ padding: clamp(44px, 7vw, 72px) 0; }
+.section--tint{ background: var(--bg-2); }
+
+.section__head{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 26px;
+}
+
+.section__title{
+  font-size: clamp(27px, 5vw, 38px);
+  margin: 8px 0 0;
+}
+
+.section__note{
+  font-size: 15px;
+  color: var(--ink-2);
+  margin: 10px 0 0;
+  max-width: 52ch;
+}
+
+/* ---------- GUIDA: due domande ---------- */
+
+.guide{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  padding: clamp(22px, 4vw, 34px);
+  box-shadow: var(--shadow);
+}
+
+.guide__q{ margin-top: 26px; }
+.guide__q:first-of-type{ margin-top: 22px; }
+
+.guide__label{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.guide__num{
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent);
+  width: 20px; height: 20px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transform: translateY(2px);
+}
+
+.guide__ask{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -.02em;
+}
+
+.opts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.opt{
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 17px;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.opt:hover{ border-color: var(--line-strong); }
+
+.opt[aria-pressed="true"]{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.guide__out{ margin-top: 28px; }
+
+.result{
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 18px;
+  align-items: center;
+  background: var(--accent-soft);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: var(--r-m);
+  padding: 16px;
+}
+
+.result__shot{ border-radius: var(--r-s); }
+.result__shot .shot__ph::after{ width: 72%; }
+.result__shot .shot__bowl{ width: 78%; filter: blur(5px) saturate(.75); opacity: .62; }
+
+.result__kicker{
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.result__name{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: -.025em;
+  margin: 3px 0 5px;
+}
+
+.result__why{ font-size: 14.5px; color: var(--ink-2); margin: 0; }
+
+.result__go{
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--body);
+}
+
+.result__go:hover{ text-decoration: underline; }
+
+.guide__hint{
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.guide__hint b{ color: var(--ink); }
+
+/* ---------- controlli menu ---------- */
+
+.controls{
+  position: sticky;
+  top: 60px;
+  z-index: 40;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  padding: 12px 0;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section--tint .controls{ background: color-mix(in srgb, var(--bg-2) 92%, transparent); }
+
+.controls__row{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sizeswitch{
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.sizeswitch button{
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  padding: 7px 15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sizeswitch button[aria-pressed="true"]{
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.filters{
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.chip{
+  font-family: var(--body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+}
+
+.chip:hover{ border-color: var(--line-strong); color: var(--ink); }
+
+.chip[aria-pressed="true"]{
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+/* ---------- griglia bowl ---------- */
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 540px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 940px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
+
+.card{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+
+.card:hover{
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+}
+
+.card[hidden]{ display: none; }
+
+/* --- slot foto --- */
+
+.shot{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--surface-2);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.shot img{ width:100%; height:100%; object-fit: cover; }
+
+/* Segnaposto: suggerisce la foto senza competerci.
+   Un cerchio tratteggiato (la scodella) + i colori del piatto sfocati sotto. */
+.shot__ph{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.shot__ph::after{
+  content: "";
+  position: absolute;
+  width: 64%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1.5px dashed var(--line-strong);
+  opacity: .65;
+}
+
+.shot__bowl{
+  width: 58%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, var(--c1) 0 27%, transparent 28%),
+    radial-gradient(circle at 69% 37%, var(--c2) 0 23%, transparent 24%),
+    radial-gradient(circle at 46% 71%, var(--c3) 0 26%, transparent 27%),
+    color-mix(in srgb, var(--c3) 10%, var(--surface-2));
+  filter: blur(9px) saturate(.7);
+  opacity: .5;
+}
+
+.shot__tag{
+  position: absolute;
+  bottom: 9px;
+  left: 9px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 3px 6px;
+}
+
+.badges{
+  position: absolute;
+  top: 10px; left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  z-index: 2;
+}
+
+.badge{
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge--top{ background: var(--gold-soft); color: var(--gold); border-color: color-mix(in srgb, var(--gold) 32%, transparent); }
+.badge--veg{ background: var(--veg-soft); color: var(--veg); border-color: color-mix(in srgb, var(--veg) 32%, transparent); }
+.badge--spice{ background: var(--spice-soft); color: var(--spice); border-color: color-mix(in srgb, var(--spice) 32%, transparent); }
+.badge--sea{ background: var(--sea-soft); color: var(--sea); border-color: color-mix(in srgb, var(--sea) 32%, transparent); }
+
+/* --- corpo card --- */
+
+.card__body{
+  padding: 16px 17px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.card__top{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card__name{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 21px;
+  letter-spacing: -.028em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.price{
+  font-family: var(--mono);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.price small{
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: right;
+  margin-top: 1px;
+}
+
+.card__claim{
+  font-size: 13.5px;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+.card__ing{
+  font-size: 14px;
+  color: var(--ink-2);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.card__foot{
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.alg{
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 6px;
+  cursor: help;
+}
+
+.alg--none{ color: var(--veg); background: var(--veg-soft); border-color: color-mix(in srgb, var(--veg) 28%, transparent); }
+
+.alg__lbl{
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: 2px;
+}
+
+.empty{
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* ---------- crea la tua ---------- */
+
+.build{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 780px){ .build{ grid-template-columns: 300px 1fr; align-items: start; } }
+
+.formats{
+  display: grid;
+  gap: 12px;
+  position: sticky;
+  top: 84px;
+}
+
+@media (max-width: 779px){ .formats{ position: static; grid-template-columns: 1fr 1fr; } }
+
+.format{
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-m);
+  padding: 16px;
+}
+
+.format--hi{ border-color: var(--accent); background: var(--accent-soft); }
+
+.format__n{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -.02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.format__p{
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.format__d{
+  font-size: 13.5px;
+  color: var(--ink-2);
+  margin: 7px 0 0;
+  line-height: 1.5;
+}
+
+.steps{ display: grid; gap: 12px; }
+
+.step{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: 15px 17px;
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 14px;
+}
+
+.step__n{
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-3);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  transform: translateY(1px);
+}
+
+.step__t{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 16.5px;
+  letter-spacing: -.02em;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.step__extra{
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .02em;
+}
+
+.step__list{
+  margin: 9px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ingr{
+  font-size: 13.5px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 11px;
+}
+
+.ingr b{ color: var(--accent); font-weight: 700; }
+.ingr--veg{ color: var(--veg); background: var(--veg-soft); border-color: color-mix(in srgb, var(--veg) 26%, transparent); }
+.ingr--spice{ color: var(--spice); background: var(--spice-soft); border-color: color-mix(in srgb, var(--spice) 26%, transparent); }
+
+.faitu{
+  margin-top: 4px;
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  border: 1px solid var(--hero-line);
+  border-radius: var(--r-m);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.faitu p{ margin: 0; font-size: 15px; color: var(--hero-ink-2); flex: 1; min-width: 220px; }
+.faitu b{ color: var(--hero-ink); font-family: var(--display); font-size: 17px; letter-spacing: -.02em; }
+
+/* ---------- listini compatti ---------- */
+
+.rows{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 700px){ .rows{ grid-template-columns: repeat(2, 1fr); } }
+
+.block{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.block__head{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.block__shot{
+  width: 60px; height: 60px;
+  border-radius: var(--r-s);
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--surface-2);
+  display: grid; place-items: center;
+  position: relative;
+}
+
+/* alle dimensioni ridotte il cerchio tratteggiato sparisce e la sfocatura si alleggerisce */
+.block__shot .shot__ph::after{ display: none; }
+.block__shot .shot__bowl{ width: 84%; filter: blur(4px) saturate(.75); opacity: .6; }
+
+.block__meta{ flex: 1; min-width: 0; }
+
+.block__t{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -.025em;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.block__d{ font-size: 13.5px; color: var(--ink-2); margin: 3px 0 0; }
+
+.block__list{
+  list-style: none;
+  margin: 0;
+  padding: 6px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.block__list li{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14.5px;
+}
+
+.block__list li:last-child{ border-bottom: none; }
+
+.block__list .price{ font-size: 14px; }
+
+.li__n{ color: var(--ink); }
+.li__a{
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ---------- allergeni ---------- */
+
+.alert{
+  display: flex;
+  gap: 14px;
+  background: var(--gold-soft);
+  border: 1.5px solid color-mix(in srgb, var(--gold) 34%, transparent);
+  border-radius: var(--r-m);
+  padding: 16px 18px;
+  margin-bottom: 26px;
+}
+
+.alert__i{ font-size: 20px; line-height: 1.3; flex-shrink: 0; }
+.alert__b{ margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.alert__b strong{ color: var(--ink); display: block; margin-bottom: 3px; font-size: 15px; }
+
+.legend{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 8px;
+}
+
+.legend__i{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.legend__c{
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--ink-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- footer ---------- */
+
+.foot{
+  background: var(--hero-bg);
+  color: var(--hero-ink-2);
+  padding: 44px 0 40px;
+  font-size: 14px;
+}
+
+.foot__t{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(24px, 4.5vw, 32px);
+  letter-spacing: -.03em;
+  color: var(--hero-ink);
+  margin: 0 0 10px;
+}
+
+.foot__grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px 46px;
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hero-line);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
+.foot__grid b{
+  display: block;
+  color: var(--hero-ink);
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.todo{
+  margin-top: 28px;
+  padding: 14px 16px;
+  border: 1px dashed var(--hero-line);
+  border-radius: var(--r-s);
+  font-size: 13px;
+  color: var(--hero-ink-2);
+}
+
+.todo b{ color: var(--hero-ink); }
+
+/* ---------- motion ---------- */
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card:hover{ transform: none; }
+}
+
+html{ scroll-behavior: smooth; scroll-padding-top: 120px; }
+
+/* ---------- stampa ---------- */
+
+@media print{
+  .topbar, .controls, .themebtn, .guide__out, .hero::after{ display: none !important; }
+  body{ background: #fff; color: #000; }
+  .card, .block, .step{ break-inside: avoid; box-shadow: none; }
+  .grid{ grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+
+
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <a class="mark" href="#top">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M4 14 h24 a12 12 0 0 1 -24 0 z" fill="var(--accent)"></path>
+        <circle cx="12" cy="10" r="2.6" fill="var(--ink)"></circle>
+        <circle cx="19.5" cy="8.5" r="2" fill="var(--gold)"></circle>
+        <circle cx="24.5" cy="11.5" r="1.7" fill="var(--veg)"></circle>
+      </svg>
+      <span class="mark__type">bowlita<i>.</i></span>
+    </a>
+
+    <nav class="topnav" aria-label="Sezioni del menu">
+      <a href="#guida">Non so cosa scegliere</a>
+      <a href="#bowl">Bowl</a>
+      <a href="#crea">Crea la tua</a>
+      <a href="#banco">Dal banco</a>
+      <a href="#bere">Bere &amp; dolci</a>
+      <a href="#allergeni">Allergeni</a>
+    </nav>
+
+    <button class="themebtn" id="theme" type="button" aria-label="Cambia tema chiaro/scuro">◐</button>
+  </div>
+</header>
+
+
+<section class="hero" id="top">
+  <div class="wrap hero__in">
+    <p class="eyebrow">Poke · Roma · Pranzo e cena</p>
+    <h1 class="display hero__title">Dimmi cosa ti va.<br>Al resto penso io<i>.</i></h1>
+    <p class="hero__sub">
+      Nove bowl già pensate per non farti sbagliare, oppure te la costruisci da zero.
+      Regular o Large, tutto incluso: nessun supplemento a sorpresa.
+    </p>
+
+    <div class="hero__paths">
+      <a class="btn btn--primary" href="#guida">Non so cosa scegliere →</a>
+      <a class="btn btn--ghost" href="#bowl">So già cosa voglio</a>
+    </div>
+
+    <div class="hero__facts">
+      <span>Regular 10,99 €</span>
+      <span>Large 13,99 €</span>
+      <span>Pronto in 10–15 min</span>
+      <span>Ritiro e consegna</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============== GUIDA =============== -->
+<section class="section" id="guida">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">In due domande</p>
+        <h2 class="display section__title">Ti trovo la bowl giusta</h2>
+        <p class="section__note">
+          Stessa cosa che facciamo su WhatsApp: due domande e hai il piatto.
+          Se cambi idea dopo, si cambia — nessun problema.
+        </p>
+      </div>
+    </div>
+
+    <div class="guide">
+      <div class="guide__q">
+        <div class="guide__label">
+          <span class="guide__num">1</span>
+          <span class="guide__ask">Cosa ti va oggi?</span>
+        </div>
+        <div class="opts" id="q1" role="group" aria-label="Tipo di proteina"></div>
+      </div>
+
+      <div class="guide__q">
+        <div class="guide__label">
+          <span class="guide__num">2</span>
+          <span class="guide__ask">E come lo vuoi?</span>
+        </div>
+        <div class="opts" id="q2" role="group" aria-label="Stile del piatto"></div>
+      </div>
+
+      <div class="guide__out" id="out" aria-live="polite"></div>
+
+      <p class="guide__hint">
+        <b>Non hai voglia di scegliere?</b> Dì <b>“fai tu”</b> e ti prepariamo il mix della casa
+        del giorno. È la scorciatoia più usata, e non ha mai deluso nessuno.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============== BOWL =============== -->
+<section class="section section--tint" id="bowl">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Le nostre nove</p>
+        <h2 class="display section__title">Bowl della casa</h2>
+        <p class="section__note">
+          Già bilanciate. Puoi sempre togliere o aggiungere quello che vuoi:
+          dillo e basta, non costa niente.
+        </p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="controls__row">
+        <div class="sizeswitch" role="group" aria-label="Formato">
+          <button type="button" data-size="R" aria-pressed="true">Regular</button>
+          <button type="button" data-size="L" aria-pressed="false">Large</button>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Filtra le bowl"></div>
+      </div>
+    </div>
+
+    <div class="grid" id="bowls"></div>
+  </div>
+</section>
+
+
+<!-- =============== CREA LA TUA =============== -->
+<section class="section" id="crea">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Cinque passaggi, un minuto</p>
+        <h2 class="display section__title">Crea la tua</h2>
+        <p class="section__note">
+          Base, proteina, topping, salsa, crunch. In quest’ordine, senza pensarci troppo:
+          il numero di scelte incluse cambia solo tra Regular e Large.
+        </p>
+      </div>
+    </div>
+
+    <div class="build">
+      <div class="formats">
+        <div class="format format--hi">
+          <div class="format__n"><span>Regular</span><span class="format__p">10,99 €</span></div>
+          <p class="format__d">1 base · 1 proteina · 4 topping · 1 salsa · 1 crunch</p>
+        </div>
+        <div class="format">
+          <div class="format__n"><span>Large</span><span class="format__p">13,99 €</span></div>
+          <p class="format__d">1 base · 2 proteine · 5 topping · 2 salse · 2 crunch</p>
+        </div>
+      </div>
+
+      <div class="steps" id="steps"></div>
+    </div>
+
+    <div class="faitu">
+      <p><b>Fai tu.</b> Se non hai voglia di scegliere, lo diciamo al banco e ti facciamo il mix del giorno.</p>
+      <a class="btn btn--primary" href="#bowl">Guarda le nove</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============== DAL BANCO =============== -->
+<section class="section section--tint" id="banco">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Non solo bowl</p>
+        <h2 class="display section__title">Dal banco</h2>
+        <p class="section__note">
+          Stessi ingredienti, formato diverso. Il wrap è l’opzione più leggera sul portafoglio,
+          i bao sono fatti per essere divisi.
+        </p>
+      </div>
+    </div>
+    <div class="rows" id="banco-rows"></div>
+  </div>
+</section>
+
+
+<!-- =============== BERE & DOLCI =============== -->
+<section class="section" id="bere">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Per chiudere</p>
+        <h2 class="display section__title">Bere &amp; dolci</h2>
+        <p class="section__note">Il tè freddo lo facciamo noi, ogni mattina.</p>
+      </div>
+    </div>
+    <div class="rows" id="bere-rows"></div>
+  </div>
+</section>
+
+
+<!-- =============== ALLERGENI =============== -->
+<section class="section section--tint" id="allergeni">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Regolamento UE 1169/2011</p>
+        <h2 class="display section__title">Allergeni</h2>
+      </div>
+    </div>
+
+    <div class="alert">
+      <span class="alert__i" aria-hidden="true">⚠️</span>
+      <p class="alert__b">
+        <strong>Bozza da validare in cucina prima della pubblicazione.</strong>
+        I codici sui piatti sono stati ricavati dalla lista ingredienti, non da schede tecniche
+        dei fornitori: vanno confermati etichetta per etichetta (in particolare salsa di soia,
+        teriyaki, ponzu, maionese, pane e piadina). Lavoriamo in una cucina dove tutti i 14
+        allergeni sono presenti: <b>non possiamo escludere la contaminazione crociata.</b>
+        Per allergie e intolleranze parla sempre con una persona del banco prima di ordinare.
+      </p>
+    </div>
+
+    <div class="legend" id="legend"></div>
+  </div>
+</section>
+
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__t">Ci vediamo al banco.</p>
+    <p style="margin:0;max-width:46ch;">
+      Ordina su WhatsApp e salti la coda: dì solo il tuo nome in cassa.
+    </p>
+
+    <div class="foot__grid">
+      <div><b>Orari</b>11:30 – 15:00<br>18:30 – 22:30</div>
+      <div><b>Ritiro</b>Pronto in 10–15 min</div>
+      <div><b>Consegna</b>Zone selezionate</div>
+      <div><b>Pagamenti</b>Contanti · Carta<br>Buoni pasto in negozio</div>
+    </div>
+
+    <div class="todo">
+      <b>Da completare prima del go-live:</b> indirizzo e telefono del locale ·
+      link WhatsApp Business · foto dei piatti (slot 1:1 già pronti) ·
+      conferma prezzi sul food cost reale · validazione allergeni in cucina.
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* ============================================================
+   DATI — unica fonte di verità della pagina.
+   Allineare a sito/data/menu.json quando il menu cambia.
+   ============================================================ */
+
+const ALLERGENI = {
+  GLU:'Glutine', CRO:'Crostacei', UOV:'Uova', PES:'Pesce', ARA:'Arachidi',
+  SOI:'Soia', LAT:'Latte', FRU:'Frutta a guscio', SED:'Sedano', SEN:'Senape',
+  SES:'Sesamo', SOL:'Solfiti', LUP:'Lupini', MOL:'Molluschi'
+};
+
+const BOWLS = [
+  { id:'hawaii', nome:'Hawaii', sup:0, tag:['pesce'], badge:['top','sea'],
+    claim:'La più ordinata. Se è la prima volta, parti da qui.',
+    ing:'Riso bianco, salmone, avocado, pomodoro, ponzu, sesamo nero, pistacchio, mandorle.',
+    alg:['PES','SOI','GLU','SES','FRU'], col:['#F2724B','#7FA64A','#D8452F'] },
+
+  { id:'pacific', nome:'Pacific', sup:0, tag:['pesce'], badge:['sea'],
+    claim:'Fresca ma sazia. Il tonno regge bene le verdure marinate.',
+    ing:'Tonno, zucchine, carote, teriyaki, tzatziki.',
+    alg:['PES','SOI','GLU','LAT'], col:['#C7503F','#8BAF52','#E0A93C'] },
+
+  { id:'devil', nome:'Devil', sup:0, tag:['pesce','piccante'], badge:['spice','sea'],
+    claim:'Piccantina vera. Se ami la spicy mayo, è questa.',
+    ing:'Salmone, wakame, spicy mayo.',
+    alg:['PES','UOV','SOI','SEN','SES'], col:['#E8452C','#2E6B4F','#F0764A'] },
+
+  { id:'polipus', nome:'Polipus', sup:1, tag:['pesce'], badge:['sea'],
+    claim:'Il polpo con il miele: strano sulla carta, poi lo riordini.',
+    ing:'Polpo, edamame, olive, miele.',
+    alg:['MOL','SOI'], col:['#B84A5A','#6E9B4A','#D9A544'] },
+
+  { id:'camarao', nome:'Camarao', sup:0, tag:['pesce'], badge:['sea'],
+    claim:'Gamberi e ceci: la più proteica del gruppo pesce.',
+    ing:'Gamberi, cetriolo, ceci, spicy mayo.',
+    alg:['CRO','UOV','SEN','SOL'], col:['#F0846A','#88AF56','#D9C07A'] },
+
+  { id:'chicken', nome:'Chicken', sup:0, tag:['carne','cotto'], badge:['top'],
+    claim:'Niente crudo, niente sorprese. La più ordinata dopo la Hawaii.',
+    ing:'Pollo, zucchine, peperone, teriyaki.',
+    alg:['SOI','GLU'], col:['#D9A25A','#7FA64A','#D8542F'] },
+
+  { id:'reale', nome:'La Reale', sup:0, tag:['carne','cotto'], badge:[],
+    claim:'La più “da secondo piatto”. Vitello e tzatziki funzionano.',
+    ing:'Reale di vitello, verza, tzatziki.',
+    alg:['LAT'], col:['#A8523F','#7E9B58','#E8E0CC'] },
+
+  { id:'pulled', nome:'Pulled Pork', sup:0, tag:['carne','cotto'], badge:[],
+    claim:'Dolce e affumicata. La scelta più golosa del menu.',
+    ing:'Pulled pork, zucchine, miele.',
+    alg:['SEN','SOI','GLU'], col:['#9E4A2E','#7FA64A','#E0A93C'] },
+
+  { id:'rainbow', nome:'Rainbow', sup:0, tag:['veg','cotto'], badge:['veg'],
+    claim:'100% vegetale e per niente triste. La più leggera.',
+    ing:'Riso basmati, verdure di stagione, ceci, salsa al limone.',
+    alg:[], col:['#7FA64A','#E0B93C','#C4485E'] }
+];
+
+const STEPS = [
+  { t:'Base', extra:'compresa', items:[
+      'riso bianco','riso integrale','riso nero','riso basmati','insalata','mix'] },
+  { t:'Proteina', extra:'in più +2,00 €', items:[
+      'salmone','tonno','pollo','pulled pork','reale di vitello',
+      {n:'tofu', v:1},{n:'edamame', v:1},{n:'gamberi', up:'+1 €'},{n:'polpo', up:'+1 €'}] },
+  { t:'Topping', extra:'in più +0,80 €', items:[
+      {n:'avocado', up:'+1 €'},'mango','pomodoro','cetriolo','carote','verza rossa','verza bianca',
+      'zucchine','peperone','rapa rossa','wakame','cipolla marinata','ceci','olive',
+      'pomodori secchi','edamame'] },
+  { t:'Salsa', extra:'in più +0,80 €', items:[
+      'ponzu','teriyaki','soia',{n:'spicy mayo', s:1},'limone','miele','tzatziki',{n:'piccante', s:1}] },
+  { t:'Crunch', extra:'in più +0,80 €', items:[
+      'sesamo nero','sesamo bianco','pistacchio','mandorle','noci','cipolla croccante',
+      'cornflakes','uvetta'] }
+];
+
+const BANCO = [
+  { t:'Burger', p:'10,99 €', d:'Nel pane, con le stesse proteine delle bowl.',
+    col:['#C4763A','#7FA64A','#E0A93C'], alg:'Il pane contiene GLU · SES',
+    items:[
+      {n:'Salmone', a:'PES · GLU · SES · UOV'},
+      {n:'Tonno', a:'PES · GLU · SES · UOV'},
+      {n:'Polpo', a:'MOL · GLU · SES · UOV'},
+      {n:'Pollo', a:'GLU · SES · UOV'},
+      {n:'Pulled Pork', a:'GLU · SES · UOV · SEN'},
+      {n:'Reale di vitello', a:'GLU · SES · UOV · LAT'},
+      {n:'Vegetariano 🌱', a:'GLU · SES · UOV'} ] },
+
+  { t:'Wrap', p:'8,99 €', d:'Il più leggero sul conto. Si mangia camminando.',
+    col:['#E2CFA8','#7FA64A','#C4763A'], alg:'La piadina contiene GLU',
+    items:[
+      {n:'Salmone', a:'PES · GLU'},
+      {n:'Tonno', a:'PES · GLU'},
+      {n:'Pollo', a:'GLU'},
+      {n:'Pulled Pork', a:'GLU · SEN · SOI'},
+      {n:'Reale di vitello', a:'GLU · LAT'},
+      {n:'Vegetariano 🌱', a:'GLU'} ] },
+
+  { t:'Tartare', p:'da 9,99 €', d:'Solo pesce, tagliato al momento.',
+    col:['#F2724B','#C7503F','#2E6B4F'], alg:'',
+    items:[
+      {n:'Salmone Classic', p:'9,99 €', a:'PES · SOI · SES'},
+      {n:'Tonno Classic', p:'9,99 €', a:'PES · SOI · SES'},
+      {n:'Gourmet Salmone', p:'11,99 €', a:'PES · SOI · SES · FRU'},
+      {n:'Gourmet Tonno', p:'11,99 €', a:'PES · SOI · SES · FRU'},
+      {n:'Gamberi', p:'12,99 €', a:'CRO · SOL · SOI'} ] },
+
+  { t:'Bao', p:'9,99 €', d:'Tre pezzi. Il formato giusto da dividere in due.',
+    col:['#F0E4D4','#C4763A','#7FA64A'], alg:'Il pane bao contiene GLU · SOI',
+    items:[
+      {n:'Carne — pollo, pulled pork, pastrami', a:'GLU · SOI · SES · SEN'},
+      {n:'Pesce — salmone, tonno, gambero', a:'GLU · SOI · SES · PES · CRO'} ] },
+
+  { t:'Zuppe', p:'7,50 €', d:'Calde, per quando fuori fa il suo.',
+    col:['#D98E3C','#C4A94A','#8B6B3A'], alg:'',
+    items:[
+      {n:'Vellutata di verdure', a:'SED'},
+      {n:'Vellutata di ceci', a:'SED'},
+      {n:'Zuppa di fagioli', a:'SED'} ] }
+];
+
+const BERE = [
+  { t:'Bevande', p:'da 1,50 €', d:'Il tè freddo lo facciamo noi, ogni mattina.',
+    col:['#6FC7D3','#C4A94A','#7FA64A'], alg:'',
+    items:[
+      {n:'Acqua', p:'1,50 €', a:''},
+      {n:'Lattina', p:'2,50 €', a:''},
+      {n:'Tè freddo artigianale', p:'3,00 €', a:''},
+      {n:'Estratto di frutta', p:'4,00 €', a:''},
+      {n:'Bubble tea', p:'4,50 €', a:'può contenere LAT'},
+      {n:'Birra giapponese', p:'4,50 €', a:'GLU · SOL'} ] },
+
+  { t:'Dolci', p:'da 4,00 €', d:'Piccoli. Dopo una Large ci stanno lo stesso.',
+    col:['#E8A0B4','#F2C94C','#7FA64A'], alg:'',
+    items:[
+      {n:'Mochi (2 pz)', p:'4,00 €', a:'può contenere LAT · FRU'},
+      {n:'Fruit bowl', p:'4,00 €', a:''},
+      {n:'Cheesecake al mango', p:'4,50 €', a:'GLU · LAT · UOV'} ] }
+];
+
+const FILTRI = [
+  { id:'all',     l:'Tutte' },
+  { id:'pesce',   l:'Pesce' },
+  { id:'carne',   l:'Carne' },
+  { id:'veg',     l:'Veg' },
+  { id:'piccante',l:'Piccante' },
+  { id:'cotto',   l:'Niente crudo' }
+];
+
+const GUIDA_Q1 = [
+  { id:'pesce', l:'Pesce' },
+  { id:'carne', l:'Carne' },
+  { id:'veg',   l:'Verdure' },
+  { id:'boh',   l:'Scegli tu' }
+];
+
+const GUIDA_Q2 = [
+  { id:'leggero',  l:'Leggero' },
+  { id:'sostanza', l:'Che mi sazi' },
+  { id:'piccante', l:'Con del carattere' }
+];
+
+/* consiglio: proteina × stile → bowl + motivo */
+const CONSIGLI = {
+  'pesce|leggero':   ['pacific',  'Tonno e verdure marinate: sazia senza appesantire.'],
+  'pesce|sostanza':  ['hawaii',   'Salmone, avocado e frutta secca. La più completa che abbiamo.'],
+  'pesce|piccante':  ['devil',    'Salmone e spicy mayo. Piccante vero, non per finta.'],
+  'carne|leggero':   ['chicken',  'Pollo e verdure, tutto cotto. Zero pesantezza.'],
+  'carne|sostanza':  ['pulled',   'Pulled pork e miele: la più golosa del menu.'],
+  'carne|piccante':  ['chicken',  'Ti facciamo la Chicken con la spicy mayo al posto del teriyaki.'],
+  'veg|leggero':     ['rainbow',  'Verdure, ceci e limone. La più leggera in assoluto.'],
+  'veg|sostanza':    ['rainbow',  'Rainbow in Large, con tofu ed edamame come doppia proteina.'],
+  'veg|piccante':    ['rainbow',  'Rainbow con la spicy mayo al posto del limone. Funziona.'],
+  'boh|leggero':     ['rainbow',  'Nel dubbio, la più fresca. Non ha mai deluso nessuno.'],
+  'boh|sostanza':    ['hawaii',   'È la più ordinata da noi. Se non sai, prendi questa.'],
+  'boh|piccante':    ['devil',    'La piccante della casa. Salmone e spicy mayo.']
+};
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+
+const PREZZI = { R: 10.99, L: 13.99 };
+let taglia  = 'R';
+let filtro  = 'all';
+const scelta = { q1: null, q2: null };
+
+const eur = n => n.toFixed(2).replace('.', ',') + ' €';
+const el  = (t, c) => { const e = document.createElement(t); if (c) e.className = c; return e; };
+
+function bowlShot(col, tag){
+  return `<div class="shot__ph" aria-hidden="true">
+      <div class="shot__bowl" style="--c1:${col[0]};--c2:${col[1]};--c3:${col[2]}"></div>
+    </div>${tag ? `<span class="shot__tag">${tag}</span>` : ''}`;
+}
+
+const BADGE_L = { top:'Più ordinata', veg:'Veg', spice:'Piccante', sea:'Pesce' };
+
+function algChips(codici){
+  if (!codici.length){
+    return `<span class="alg__lbl">Allergeni</span><span class="alg alg--none">nessuno dei 14</span>`;
+  }
+  return `<span class="alg__lbl">Allergeni</span>` + codici
+    .map(c => `<span class="alg" title="${ALLERGENI[c]}">${c}</span>`).join('');
+}
+
+function renderBowls(){
+  const box = document.getElementById('bowls');
+  box.innerHTML = '';
+
+  const visibili = BOWLS.filter(b => filtro === 'all' || b.tag.includes(filtro));
+
+  if (!visibili.length){
+    box.innerHTML = `<p class="empty">Niente con questo filtro — prova “Tutte”, o creala tu da zero.</p>`;
+    return;
+  }
+
+  visibili.forEach(b => {
+    const card = el('article', 'card');
+    const prezzo = PREZZI[taglia] + b.sup;
+
+    card.innerHTML = `
+      <div class="shot">
+        ${b.badge.length ? `<div class="badges">${b.badge
+            .map(x => `<span class="badge badge--${x}">${BADGE_L[x]}</span>`).join('')}</div>` : ''}
+        ${bowlShot(b.col, 'foto 1:1')}
+      </div>
+      <div class="card__body">
+        <div class="card__top">
+          <h3 class="card__name">${b.nome}</h3>
+          <span class="price">${eur(prezzo)}<small>${taglia === 'R' ? 'Regular' : 'Large'}</small></span>
+        </div>
+        <p class="card__claim">${b.claim}</p>
+        <p class="card__ing">${b.ing}${b.sup ? ' <b>Supplemento +1 €.</b>' : ''}</p>
+        <div class="card__foot">${algChips(b.alg)}</div>
+      </div>`;
+    box.appendChild(card);
+  });
+}
+
+function renderFiltri(){
+  const box = document.getElementById('filters');
+  FILTRI.forEach(f => {
+    const b = el('button', 'chip');
+    b.type = 'button';
+    b.textContent = f.l;
+    b.setAttribute('aria-pressed', String(f.id === filtro));
+    b.addEventListener('click', () => {
+      filtro = f.id;
+      [...box.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+      renderBowls();
+    });
+    box.appendChild(b);
+  });
+}
+
+function renderSteps(){
+  const box = document.getElementById('steps');
+  STEPS.forEach((s, i) => {
+    const d = el('div', 'step');
+    const lista = s.items.map(it => {
+      if (typeof it === 'string') return `<span class="ingr">${it}</span>`;
+      const cls = it.v ? ' ingr--veg' : it.s ? ' ingr--spice' : '';
+      return `<span class="ingr${cls}">${it.n}${it.up ? ` <b>${it.up}</b>` : ''}</span>`;
+    }).join('');
+
+    d.innerHTML = `
+      <span class="step__n">${i + 1}</span>
+      <div>
+        <div class="step__t"><span>${s.t}</span><span class="step__extra">${s.extra}</span></div>
+        <div class="step__list">${lista}</div>
+      </div>`;
+    box.appendChild(d);
+  });
+}
+
+function renderBlocchi(dati, targetId){
+  const box = document.getElementById(targetId);
+  dati.forEach(g => {
+    const b = el('section', 'block');
+    const righe = g.items.map(i => `
+      <li>
+        <span class="li__n">${i.n}${i.a ? `<span class="li__a">${i.a}</span>` : ''}</span>
+        ${i.p ? `<span class="price">${i.p}</span>` : ''}
+      </li>`).join('');
+
+    b.innerHTML = `
+      <header class="block__head">
+        <div class="block__shot">${bowlShot(g.col, '')}</div>
+        <div class="block__meta">
+          <h3 class="block__t"><span>${g.t}</span><span class="price">${g.p}</span></h3>
+          <p class="block__d">${g.d}</p>
+        </div>
+      </header>
+      <ul class="block__list">${righe}</ul>
+      ${g.alg ? `<p style="margin:0;padding:0 16px 14px;font-family:var(--mono);
+          font-size:10.5px;letter-spacing:.05em;color:var(--ink-3);">${g.alg}</p>` : ''}`;
+    box.appendChild(b);
+  });
+}
+
+function renderLegenda(){
+  const box = document.getElementById('legend');
+  Object.entries(ALLERGENI).forEach(([c, n]) => {
+    const d = el('div', 'legend__i');
+    d.innerHTML = `<span class="legend__c">${c}</span><span>${n}</span>`;
+    box.appendChild(d);
+  });
+}
+
+/* --- guida --- */
+
+function renderGuida(){
+  [['q1', GUIDA_Q1], ['q2', GUIDA_Q2]].forEach(([key, opzioni]) => {
+    const box = document.getElementById(key);
+    opzioni.forEach(o => {
+      const b = el('button', 'opt');
+      b.type = 'button';
+      b.textContent = o.l;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => {
+        scelta[key] = o.id;
+        [...box.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+        renderRisultato();
+      });
+      box.appendChild(b);
+    });
+  });
+}
+
+function renderRisultato(){
+  const out = document.getElementById('out');
+  if (!scelta.q1 || !scelta.q2){ out.innerHTML = ''; return; }
+
+  const [id, perche] = CONSIGLI[`${scelta.q1}|${scelta.q2}`];
+  const b = BOWLS.find(x => x.id === id);
+  const prezzo = PREZZI[taglia] + b.sup;
+
+  out.innerHTML = `
+    <div class="result">
+      <div class="shot result__shot">${bowlShot(b.col, '')}</div>
+      <div>
+        <p class="result__kicker">Ti consiglio</p>
+        <p class="result__name">${b.nome} · ${eur(prezzo)}</p>
+        <p class="result__why">${perche}</p>
+        <button class="result__go" type="button" id="go">Vedi ingredienti e allergeni →</button>
+      </div>
+    </div>`;
+
+  document.getElementById('go').addEventListener('click', () => {
+    filtro = 'all';
+    [...document.getElementById('filters').children]
+      .forEach((c, i) => c.setAttribute('aria-pressed', String(i === 0)));
+    renderBowls();
+    document.getElementById('bowl').scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+/* --- formato --- */
+
+document.querySelectorAll('.sizeswitch button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    taglia = btn.dataset.size;
+    document.querySelectorAll('.sizeswitch button')
+      .forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    document.querySelectorAll('.format').forEach(f => f.classList.remove('format--hi'));
+    document.querySelectorAll('.format')[taglia === 'R' ? 0 : 1].classList.add('format--hi');
+    renderBowls();
+    renderRisultato();
+  });
+});
+
+/* --- tema --- */
+
+document.getElementById('theme').addEventListener('click', () => {
+  const root = document.documentElement;
+  const scuroOra = root.getAttribute('data-theme') === 'dark' ||
+    (!root.getAttribute('data-theme') &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
+  root.setAttribute('data-theme', scuroOra ? 'light' : 'dark');
+});
+
+/* --- avvio --- */
+
+renderFiltri();
+renderBowls();
+renderSteps();
+renderBlocchi(BANCO, 'banco-rows');
+renderBlocchi(BERE, 'bere-rows');
+renderLegenda();
+renderGuida();
+</script>
