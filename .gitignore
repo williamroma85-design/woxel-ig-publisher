@@ -8,3 +8,15 @@ __pycache__/
 *.pyo
 .DS_Store
 .env
+
+# graphify: si committano graph.json, GRAPH_REPORT.md e memory/ (memoria persistente),
+# non gli artefatti pesanti/rigenerabili
+graphify-out/graph.html
+graphify-out/tree.html
+graphify-out/graph.svg
+graphify-out/graph.graphml
+graphify-out/cypher.txt
+graphify-out/cache/
+graphify-out/.graphify_root
+graphify-out/manifest.json
+.graphify_cache/

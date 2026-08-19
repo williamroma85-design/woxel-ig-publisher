@@ -1,0 +1,200 @@
+{
+  "communities": {
+    "0": [
+      "refresh_token",
+      "refresh_token_encrypt_for_github",
+      "refresh_token_gh_request",
+      "refresh_token_log",
+      "refresh_token_main",
+      "refresh_token_rationale_31",
+      "refresh_token_rationale_77",
+      "refresh_token_refresh_meta_token"
+    ],
+    "1": [
+      "woxel_daily_publish_get_ig_user_id",
+      "woxel_daily_publish_get_token",
+      "woxel_daily_publish_http_get",
+      "woxel_daily_publish_main",
+      "woxel_daily_publish_rationale_278",
+      "woxel_daily_publish_rationale_343",
+      "woxel_daily_publish_today_in_rome"
+    ],
+    "2": [
+      "woxel_daily_publish",
+      "woxel_daily_publish_multipart_upload",
+      "woxel_daily_publish_rationale_56",
+      "woxel_daily_publish_upload_0x0",
+      "woxel_daily_publish_upload_catbox",
+      "woxel_daily_publish_upload_tmpfiles"
+    ],
+    "3": [
+      "woxel_daily_publish_ensure_github_repo",
+      "woxel_daily_publish_gh_api",
+      "woxel_daily_publish_log",
+      "woxel_daily_publish_rationale_229",
+      "woxel_daily_publish_upload_image_any",
+      "woxel_daily_publish_upload_image_github"
+    ],
+    "4": [
+      "woxel_daily_publish_convert_png_to_jpeg",
+      "woxel_daily_publish_http_post",
+      "woxel_daily_publish_publish_post",
+      "woxel_daily_publish_rationale_167"
+    ],
+    "5": [
+      "claude_hooks_graphify_guard",
+      "claude_hooks_graphify_guard_find_graphify",
+      "claude_hooks_graphify_guard_sh__entry"
+    ],
+    "6": [
+      "claude_hooks_graphify_session_start",
+      "claude_hooks_graphify_session_start_path",
+      "claude_hooks_graphify_session_start_sh__entry"
+    ],
+    "7": [
+      "woxel_daily_publish_get_github_creds",
+      "woxel_daily_publish_rationale_77"
+    ]
+  },
+  "cohesion": {
+    "0": 0.39285714285714285,
+    "1": 0.2857142857142857,
+    "2": 0.5333333333333333,
+    "3": 0.6,
+    "4": 0.5,
+    "5": 0.6666666666666666,
+    "6": 0.6666666666666666,
+    "7": 1.0
+  },
+  "gods": [
+    {
+      "id": "woxel_daily_publish_upload_image_any",
+      "label": "upload_image_any()",
+      "degree": 11
+    },
+    {
+      "id": "woxel_daily_publish_log",
+      "label": "log()",
+      "degree": 7
+    },
+    {
+      "id": "woxel_daily_publish_main",
+      "label": "main()",
+      "degree": 6
+    },
+    {
+      "id": "woxel_daily_publish_publish_post",
+      "label": "publish_post()",
+      "degree": 6
+    },
+    {
+      "id": "refresh_token_main",
+      "label": "main()",
+      "degree": 5
+    },
+    {
+      "id": "woxel_daily_publish_get_ig_user_id",
+      "label": "get_ig_user_id()",
+      "degree": 5
+    },
+    {
+      "id": "woxel_daily_publish_multipart_upload",
+      "label": "multipart_upload()",
+      "degree": 5
+    },
+    {
+      "id": "woxel_daily_publish_ensure_github_repo",
+      "label": "ensure_github_repo()",
+      "degree": 4
+    },
+    {
+      "id": "woxel_daily_publish_gh_api",
+      "label": "gh_api()",
+      "degree": 4
+    },
+    {
+      "id": "woxel_daily_publish_upload_image_github",
+      "label": "upload_image_github()",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "upload_image_any()",
+      "target": "_upload_0x0()",
+      "source_files": [
+        "woxel_daily_publish.py",
+        "woxel_daily_publish.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "indirect_call",
+      "note": "Bridges community 2 → community 3"
+    },
+    {
+      "source": "get_ig_user_id()",
+      "target": "log()",
+      "source_files": [
+        "woxel_daily_publish.py",
+        "woxel_daily_publish.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 1 → community 3"
+    },
+    {
+      "source": "main()",
+      "target": "publish_post()",
+      "source_files": [
+        "woxel_daily_publish.py",
+        "woxel_daily_publish.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 1 → community 4"
+    },
+    {
+      "source": "publish_post()",
+      "target": "log()",
+      "source_files": [
+        "woxel_daily_publish.py",
+        "woxel_daily_publish.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 3 → community 4"
+    },
+    {
+      "source": "upload_image_any()",
+      "target": "get_github_creds()",
+      "source_files": [
+        "woxel_daily_publish.py",
+        "woxel_daily_publish.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 3 → community 7"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `upload_image_any()` connect `upload_image_any` to `woxel_daily_publish.py`, `publish_post`, `get_github_creds`?",
+      "why": "High betweenness centrality (0.059) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `get_ig_user_id()` connect `main` to `woxel_daily_publish.py`, `upload_image_any`?",
+      "why": "High betweenness centrality (0.034) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `upload_image_any()` (e.g. with `_upload_0x0()` and `_upload_tmpfiles()`) actually correct?",
+      "why": "`upload_image_any()` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `graphify-guard.sh script`, `PATH`, `graphify-session-start.sh script` to the rest of the system?",
+      "why": "3 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}
