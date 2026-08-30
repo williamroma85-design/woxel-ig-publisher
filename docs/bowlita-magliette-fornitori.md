@@ -1,60 +1,72 @@
-# Bowlita Poke — Ricerca fornitori magliette personalizzate
+# Bowlita Poke — Fornitori magliette, consegna entro ven 4 settembre 2026
 
-Rilevazione: 27 agosto 2026. Dossier visuale: https://claude.ai/code/artifact/fd308c98-c3ca-48de-94ae-387db68fcab9
+Rilevazione: 30 agosto 2026. Dossier: https://claude.ai/code/artifact/fd308c98-c3ca-48de-94ae-387db68fcab9
 
-## Verdetto per fascia di quantità
+## Vincoli
 
-| Scenario | Fornitore | Prezzo indicativo |
+- Consegna entro **venerdì 4 settembre 2026**. Oggi è domenica 30/08 → 5 giorni lavorativi (lun 31 → ven 4)
+- Ordine unico con **taglie assortite** (blocco)
+- Due posizioni di stampa: **petto fronte alto a sinistra** + **retro centrale grande**
+
+## Verdetto
+
+| Ordine | Fornitore | Consegna prevista |
 |---|---|---|
-| 10–25 pz, subito | **CityShirt** | ~€10/pz (10–24) |
-| 50–100 pz, budget | **Stampasi** | da €2,47/pz a 100 |
-| Merch da vendere | **Printful** (POD) | nessun minimo, costo/pz alto |
+| Lun 31 entro 12:00 | **Errebipromo** | mar 1 set — 3 giorni di margine |
+| Lun 31 | **Stampaprint** | mer 2 set — il più economico |
+| Mar 1 (riapre) | **CityShirt** | gio 3 set — verificare arretrato ferie |
 
-## Confronto completo
+## Confronto (ordinando lun 31 agosto)
 
-| Fornitore | Prezzo indicativo | Minimo | Consegna | Tecniche | Nota |
+| Entro ven 4? | Fornitore | Tempi | Taglie | Costo | Nota |
 |---|---|---|---|---|---|
-| CityShirt (cityshirt.it, Napoli) | €15 (1pz) · €12 (5–9) · €10 (10–24) · €8,50 (25–49) | 1 pezzo | 24–48h | DTG, serigrafia, ricamo | Bozza gratis. Spedizione gratis >€49,90, altrimenti €5,90. **In ferie fino al 31/08, lavorazione dal 1/09.** |
-| Stampaprint (stampaprint.net) | da €1,59–2 | nessuno | 48h | serigrafia, transfer | Controllo file base gratis; "controlla e perfeziona" €29,99 |
-| Stampasi (stampasi.it) | da €2,47 a 100 pz | 10/25/50/100 per modello | 10 gg lav. | serigrafia, DTG, transfer, ricamo | Bozza inclusa, spedizione gratis. ~4,5★ / ~700 rec. Trustpilot |
-| Teefactory (teefactory.it) | su preventivo | ~10, per modello | su commessa | serigrafia, DTG, DTF, ricamo | Linea HORECA dedicata a ristoranti (t-shirt, polo, camicie) |
-| Helloprint (helloprint.com/it-it) | su preventivo | basso | variabile | stampa, ricamo | Categoria "magliette da lavoro", bozza gratuita |
-| Camaloon (camaloon.it) | su configuratore | basso | variabile | serigrafia, digitale | Configuratore semplice, ottima assistenza. Prezzi medi |
-| Vistaprint (vistaprint.it) | da €15/pz | 1–5 pz | rapida | serigrafia, DTG, ricamo | Il più caro. Piano B |
-| Printful (printful.com/it) | alto/pz | nessuno | su ordine | DTG, ricamo | Print on demand + dropshipping, no canone. Solo merch |
+| SÌ · mar 1 | **Errebipromo** | ordine entro 12:00 → spedito stesso giorno → 1 gg lav. | XS–3XL | spedizione sempre gratis, prezzi **IVA esclusa** | Produttore diretto, DTG/DTF/ricamo in casa in Italia. Da 1 a 500 pz. Supporto grafico gratuito. Isole/montagna 2 gg. Sconti fino al 40% oltre 100 pz |
+| SÌ · mer 2 | **Stampaprint** | 48h | XS–3XL | da €2 stampa logo | Nessun minimo. Fronte, retro e maniche. Ristampa gratuita se non soddisfatto. Controllo file base gratis / prof. €5 / fix €29,99 |
+| SÌ · mar 1–mer 2 | **T-ShirtPersonalizzate** | ordine entro 10:00 → spedito stesso giorno | sì | spedizione gratis >€89 | Opzione "lavorazione 24H" da spuntare al checkout, non automatica |
+| SÌ ma rischioso · gio 3 | **CityShirt** | 24–48h, da mar 1 | sì | €8,50/pz a 25–49 + €3–5 retro | Chiuso per ferie fino al 31/08. Confermare la data al telefono prima di pagare |
+| FORSE | Stampamaglie (Ravenna) | 24–48h GLS | sì | da configuratore | Piano C |
+| FORSE | Teetogo | 24–48h | sì | da €17,90/pz | Spedizione gratis >€30 ma prezzo di partenza alto |
+| FORSE, caro | Vistaprint | express a pagamento | sì (editor esplicito) | da €15/pz + express | Quasi il doppio. Piano di emergenza |
+| **NO** | Stampasi | 10 gg lavorativi | — | da €2,47/pz | Consegnerebbe ~14 settembre. Da tenere per il riordino |
+| **NO** | Printful | POD dall'estero | — | alto/pz | Fuori scopo per consegna a data fissa |
 
-**Attenzione ai prezzi civetta:** "da €1,59" e "da €2,47" sono capi promozionali leggeri (130–150 g/m²) al massimo scaglione. Per una t-shirt 180–190 g/m² con logo 1 colore la forbice reale è **€7–11/pz a 25 pezzi** (fornitori IT) e **€13–16/pz** (Vistaprint).
+## Blocco a taglie assortite
 
-## Tecnica di stampa
+Funziona su tutti i fornitori della rosa: si carica la grafica **una volta**, poi una griglia con una casella per taglia; il carrello somma in un unico articolo.
 
-- **Serigrafia** — >25 pz, logo 1–2 colori. Impianti €25–50/colore una tantum, poi il €/pz più basso. Più resistente ai lavaggi.
-- **DTG** — nessun impianto, ottimo per piccole tirature e loghi multicolore. Sbiadisce prima su capi scuri.
-- **DTF** — compromesso: nessun impianto, colori pieni su nero, tenuta migliore del DTG. Ideale 10–30 pz su capo scuro.
-- **Ricamo** — il più duraturo. Richiede digitalizzazione una tantum (€20–60), no dettagli <5 mm.
+- **Lo sconto quantità si calcola sul totale del blocco, non per taglia.** 4 pezzi × 5 taglie = 20 pz allo scaglione dei 20
+- Errebipromo: t-shirt uomo XS–3XL, polo uomo S–3XL. **T-shirt donna solo fino a XXL, polo donna solo fino a L** → se servono taglie superiori, usare il modello unisex/uomo per tutti
+- Stampaprint: XS–3XL
+- **Da verificare al carrello:** che il prezzo unitario mostrato sia quello dello scaglione del totale
 
-**Consiglio:** due lotti — t-shirt DTF/serigrafia per la cucina, polo con logo ricamato per la sala.
+## Scheda prodotto
 
-## Scheda prodotto da configurare
+- **Capo:** t-shirt unisex girocollo, 100% cotone 190 g/m². Su Errebipromo: `B&C Collection TU01T` (Express24h). Equivalenti: `B&C #E190`, `Gildan Softstyle 64000`, `Fruit of the Loom Iconic 195`
+- **Colore:** nero (cucina) / bianco o colore brand (sala). Evitare grigi mélange
+- **Stampa 1 — petto:** fronte alto a sinistra, larghezza **8–10 cm**, ~7–8 cm sotto la cucitura spalla, ~5–6 cm dal centro petto
+- **Stampa 2 — retro:** centrale, larghezza **28–30 cm**, bordo superiore ~8–10 cm sotto la cucitura collo. Errebipromo lavora il retro fino a 20×30 cm — verificare se il logo è quadrato o verticale
+- **Tecnica:** **DTF** (due posizioni, capo scuro, <50 pz, nessun impianto, tiene i lavaggi meglio del DTG). Serigrafia solo sopra i 50 pz
+- **File:** due `.png` distinti, fondo trasparente, 300 dpi a dimensione reale → petto 10 cm = **1181 px**, retro 30 cm = **3543 px**. Il file petto non è il retro rimpicciolito: va semplificato
+- **Curva taglie (20 pz):** 2×S · 6×M · 6×L · 4×XL · 2×XXL
 
-- **Capo:** t-shirt unisex girocollo, 100% cotone ring-spun pettinato, 180–190 g/m². Equivalenti: Gildan Softstyle 64000, B&C #E190, Stanley/Stella Creator, Fruit of the Loom Iconic 195
-- **Colore:** nero (cucina), bianco o colore brand (sala). Evitare grigi mélange
-- **Fronte:** logo cuore sinistro, 8–10 cm di larghezza
-- **Retro (opz.):** logo grande centrato alto, 28–30 cm. +€3–5/pz
-- **Tecnica:** DTF o serigrafia 1 colore sopra i 25 pz
-- **Curva taglie (10 pz):** 1×S · 3×M · 3×L · 2×XL · 1×XXL. +2–3 pz di scorta
-- **File:** serigrafia/ricamo → vettoriale .ai/.eps/.pdf/.svg, testi in tracciati, Pantone Solid Coated. DTG/DTF → .png trasparente, 300 dpi a dimensione reale (30×40 cm = 3543×4724 px)
+**Il retro aggiunge circa il 60–90% al costo di stampa.** Su CityShirt sono €3–5/pz dichiarati.
 
-## Regole prima di pagare
+## Stime di spesa — 20 pz, cotone 190 g, DTF due posizioni
 
-1. Pretendere la bozza firmata con misure e posizioni, per iscritto
-2. Ordinare un campione singolo prima del lotto se il fornitore è nuovo
-3. Lavare il campione 3 volte a 60° prima di confermare
+| Fornitore | Stima /pz | Stima 20 pz | Spedizione |
+|---|---|---|---|
+| Stampaprint | €8–12 | €160–240 | inclusa in 48h |
+| Errebipromo | €11–15 + IVA | €220–300 + IVA | sempre gratis |
+| CityShirt | €11,50–13,50 | €230–270 | gratis >€49,90 |
+| Vistaprint | €18–22 | €360–440 | express a pagamento |
+
+**Solo CityShirt pubblica un listino per scaglione.** Le altre righe sono stime costruite sui prezzi di partenza dichiarati: i configuratori di Errebipromo e Stampaprint calcolano il prezzo in JavaScript e da questo ambiente i loro siti sono bloccati dal proxy di rete. Trattare come ordine di grandezza, non come preventivo.
 
 ## Aperto
 
-- **Manca il logo Bowlita in vettoriale** — non presente nel repo né su Dropbox
-- Da definire: quantità e curva taglie, data di consegna, solo divise o anche merch
+- **Manca ancora il logo Bowlita** — non nel repo, non su Dropbox. È il collo di bottiglia della scadenza
+- Da confermare: curva taglie, colore capo, zona di consegna (Errebipromo 1 gg regioni principali, 2 gg isole/montagna)
 
 ## Limite operativo
 
-L'ordine non è eseguibile da questo ambiente: l'egress verso vistaprint.it, stampasi.it, cityshirt.it e printful.com è bloccato dal proxy di rete (lettura delle pagine solo via servizio esterno, nessun accesso ai configuratori né upload file). L'ordine richiede comunque account e metodo di pagamento del titolare.
+L'ordine non è eseguibile da questo ambiente: egress bloccato verso i siti dei fornitori, nessun accesso ai configuratori né upload file. L'ordine richiede comunque account e metodo di pagamento del titolare.
